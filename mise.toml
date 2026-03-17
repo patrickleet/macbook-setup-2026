@@ -24,6 +24,7 @@ docker-cli = "latest"
 docker-compose = "latest"
 yq = "latest"
 aws-cli = "latest"
+gimme-aws-creds = "latest"
 
 # =============================================================================
 # Tools installed from GitHub releases (replaces ubi)
@@ -36,3 +37,4 @@ aws-cli = "latest"
 # npm global tools
 # =============================================================================
 "npm:typescript" = "latest"
+"npm:@openai/codex" = "latest"

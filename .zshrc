@@ -3,21 +3,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# ── PATH (consolidated, fast) ──────────────────────────────────────
+# ── PATH ────────────────────────────────────────────────────────────
 typeset -U path  # deduplicate PATH entries
-export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.ubi/bin:$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/dev/flutter/bin:$PATH"
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-export PATH="/Users/patrickleet/.rd/bin:$PATH"
-export PNPM_HOME="/Users/patrickleet/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-export ASDF_DATA_DIR="$HOME/.asdf"
-export PATH="$ASDF_DATA_DIR/shims:$PATH"
-
-# ── Exports ─────────────────────────────────────────────────────────
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # ── Docker Host ────────────────────────────────────────────────────
 export DOCKER_HOST=unix:///Users/patrickleet/.colima/default/docker.sock
@@ -61,21 +50,12 @@ source ~/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/command-not-found/comma
 alias k='kubectl'
 
 # ── Functions ───────────────────────────────────────────────────────
-istiocurl() {
-  kubectl run --restart=Never -t -i --rm --image=solsson/curl istiocurl -- \
-    --connect-to :80:istio-ingressgateway.istio-system.svc.cluster.local:80 "$@"
-}
-
 gac() {
   $(gimme-aws-creds -p "$@" | grep -v arn:aws:iam)
 }
 
 gacfile() {
   GIMME_AWS_CREDS_OUTPUT_FORMAT=json gimme-aws-creds -p "$@" | gimme-aws-creds --action-store-json-creds
-}
-
-yt() {
-  fabric -y "$1" --transcript
 }
 
 # ── Cached kubectl completions ─────────────────────────────────────
@@ -88,41 +68,9 @@ yt() {
       kubectl completion zsh >| "$_kc_cache" 2>/dev/null
     fi
     source "$_kc_cache"
-  fi
-}
-compdef k=kubectl
-
-# ── Lazy-load pyenv (only initializes on first use) ────────────────
-if (( $+commands[pyenv] )); then
-  pyenv() {
-    unfunction pyenv 2>/dev/null
-    eval "$(command pyenv init --path)"
-    eval "$(command pyenv init -)"
-    pyenv "$@"
-  }
-fi
-
-# ── Cached fabric aliases (regenerates when patterns dir changes) ──
-{
-  local _fab_cache="$HOME/.zsh_fabric_aliases"
-  local _fab_dir="$HOME/.config/fabric/patterns"
-  if [[ -d "$_fab_dir" ]]; then
-    if [[ ! -f "$_fab_cache" || "$_fab_dir" -nt "$_fab_cache" ]]; then
-      print -l ${(f)"$(for f in "$_fab_dir"/*; do echo "alias ${f:t}='fabric --pattern ${f:t}'"; done)"} >| "$_fab_cache"
+    if (( $+functions[_kubectl] )); then
+      compdef _kubectl k
     fi
-    source "$_fab_cache"
-  fi
-}
-
-# ── Cached try init ────────────────────────────────────────────────
-{
-  local _try_cache="$HOME/.zsh_try_init"
-  local _try_bin="$(command -v try 2>/dev/null)"
-  if [[ -n "$_try_bin" ]]; then
-    if [[ ! -f "$_try_cache" || "$_try_bin" -nt "$_try_cache" ]]; then
-      command try init ~/src/tries >| "$_try_cache" 2>/dev/null
-    fi
-    source "$_try_cache"
   fi
 }
 
@@ -139,7 +87,3 @@ eval "$(~/.local/bin/mise activate zsh)"
 
 # I can't stop typing code to open projects
 alias code=zed
-
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/patrickleet/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

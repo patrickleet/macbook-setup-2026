@@ -138,14 +138,25 @@ mise install --yes
 done_msg "All mise tools installed"
 
 # =============================================================================
-# 8. GUI apps via Homebrew casks
+# 8. Claude Code (standalone installer)
+# =============================================================================
+step "Claude Code"
+if command -v claude &>/dev/null; then
+  done_msg "Already installed ($(claude --version 2>/dev/null))"
+else
+  curl -fsSL https://claude.ai/install.sh | sh
+  done_msg "Installed"
+fi
+
+# =============================================================================
+# 9. GUI apps via Homebrew casks
 # =============================================================================
 step "GUI apps (Homebrew casks)"
 brew bundle --file="$SETUP_DIR/Brewfile"
 done_msg "GUI apps installed"
 
 # =============================================================================
-# 9. Zsh plugins (direct source, no plugin manager)
+# 10. Zsh plugins (direct source, no plugin manager)
 # =============================================================================
 step "Zsh plugins"
 ANTIGEN_DIR="$HOME/.antigen/bundles"
@@ -168,11 +179,11 @@ clone_if_missing "zsh-users/zsh-autosuggestions"
 clone_if_missing "zsh-users/zsh-syntax-highlighting"
 
 # =============================================================================
-# 10. Shell config
+# 11. Shell config
 # =============================================================================
 step "Shell config (.zshrc)"
-cp "$SETUP_DIR/.zshrc" "$HOME/.zshrc"
-done_msg "Copied .zshrc → ~/.zshrc"
+ln -sf "$SETUP_DIR/.zshrc" "$HOME/.zshrc"
+done_msg "Linked .zshrc → ~/.zshrc"
 
 # =============================================================================
 # Done!
