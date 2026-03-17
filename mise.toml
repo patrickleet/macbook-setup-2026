@@ -1,0 +1,38 @@
+# =============================================================================
+# mise.toml — Declarative dev tools config
+# Symlinked to ~/.config/mise/config.toml by init.sh
+# =============================================================================
+
+[settings]
+auto_install = true
+
+# =============================================================================
+# Dev tool runtimes
+# =============================================================================
+[tools]
+node = "lts"
+python = "latest"
+rust = "latest"
+
+# =============================================================================
+# CLI tools from mise registry
+# =============================================================================
+jq = "latest"
+kubectl = "latest"
+colima = "latest"
+docker-cli = "latest"
+docker-compose = "latest"
+yq = "latest"
+aws-cli = "latest"
+
+# =============================================================================
+# Tools installed from GitHub releases (replaces ubi)
+# =============================================================================
+"ubi:hops-ops/hops-cli" = { version = "latest", rename_exe = "hops" }
+"ubi:unbounded-tech/vnext" = "latest"
+"ubi:harmony-labs/meta" = "latest"
+
+# =============================================================================
+# npm global tools
+# =============================================================================
+"npm:typescript" = "latest"
