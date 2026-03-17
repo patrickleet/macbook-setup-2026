@@ -24,8 +24,15 @@ docker-cli = "latest"
 docker-compose = "latest"
 yq = "latest"
 aws-cli = "latest"
+gh = "latest"
 pipx = "latest"
 "pipx:gimme-aws-creds" = "latest"
+
+# =============================================================================
+# npm global tools
+# =============================================================================
+"npm:typescript" = "latest"
+"npm:@openai/codex" = "latest"
 
 # =============================================================================
 # Tools installed from GitHub releases
@@ -42,9 +49,3 @@ linux-x64 = { asset_pattern = "gitkb-linux-amd64.tar.gz" }
 linux-arm64 = { asset_pattern = "gitkb-linux-arm64.tar.gz" }
 macos-x64 = { asset_pattern = "gitkb-darwin-amd64.tar.gz" }
 macos-arm64 = { asset_pattern = "gitkb-darwin-arm64.tar.gz" }
-
-# =============================================================================
-# npm global tools
-# =============================================================================
-"npm:typescript" = "latest"
-"npm:@openai/codex" = "latest"

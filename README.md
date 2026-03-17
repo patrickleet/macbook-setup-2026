@@ -39,7 +39,7 @@ CLI tools and runtimes are managed through [`mise.toml`](/Users/patrickleet/dev/
 Current setup includes:
 
 - Runtimes: Node.js, Python, Rust
-- Infra tools: `kubectl`, `colima`, `docker-cli`, `docker-compose`, `aws-cli`, `jq`, `yq`
+- Infra tools: `kubectl`, `colima`, `docker-cli`, `docker-compose`, `aws-cli`, `gh`, `jq`, `yq`
 - GitHub release binaries via `github:`, including `gitkb`
 - Global npm packages including `typescript` and `@openai/codex`
 
