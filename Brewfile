@@ -13,6 +13,7 @@ cask "ghostty"
 # --- Communication ---
 cask "zoom"
 cask "slack"
+cask "discord"
 
 # --- Utilities ---
 cask "spotify"

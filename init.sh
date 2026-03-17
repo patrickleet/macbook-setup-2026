@@ -145,20 +145,34 @@ brew bundle --file="$SETUP_DIR/Brewfile"
 done_msg "GUI apps installed"
 
 # =============================================================================
-# 9. Shell config
+# 9. Zsh plugins (direct source, no plugin manager)
+# =============================================================================
+step "Zsh plugins"
+ANTIGEN_DIR="$HOME/.antigen/bundles"
+mkdir -p "$ANTIGEN_DIR"
+
+clone_if_missing() {
+  local repo="$1"
+  local dest="$ANTIGEN_DIR/$repo"
+  if [[ -d "$dest" ]]; then
+    done_msg "$repo (already cloned)"
+  else
+    git clone --depth 1 "https://github.com/$repo.git" "$dest"
+    done_msg "$repo"
+  fi
+}
+
+clone_if_missing "romkatv/powerlevel10k"
+clone_if_missing "robbyrussell/oh-my-zsh"
+clone_if_missing "zsh-users/zsh-autosuggestions"
+clone_if_missing "zsh-users/zsh-syntax-highlighting"
+
+# =============================================================================
+# 10. Shell config
 # =============================================================================
 step "Shell config (.zshrc)"
-ZSHRC="$HOME/.zshrc"
-
-# Ensure mise activation is in .zshrc
-if ! grep -q 'mise activate' "$ZSHRC" 2>/dev/null; then
-  cat >> "$ZSHRC" <<'ZSHEOF'
-
-# --- mise (dev tool manager) ---
-eval "$(~/.local/bin/mise activate zsh)"
-ZSHEOF
-  done_msg "Added mise activation to .zshrc"
-fi
+cp "$SETUP_DIR/.zshrc" "$HOME/.zshrc"
+done_msg "Copied .zshrc → ~/.zshrc"
 
 # =============================================================================
 # Done!

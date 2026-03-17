@@ -131,6 +131,9 @@ source ~/.antigen/bundles/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
 # syntax-highlighting must be last
 source ~/.antigen/bundles/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# ── mise (dev tool manager) ────────────────────────────────────────
+eval "$(~/.local/bin/mise activate zsh)"
+
 # ── p10k config ─────────────────────────────────────────────────────
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
