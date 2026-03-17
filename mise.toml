@@ -24,14 +24,24 @@ docker-cli = "latest"
 docker-compose = "latest"
 yq = "latest"
 aws-cli = "latest"
-gimme-aws-creds = "latest"
+pipx = "latest"
+"pipx:gimme-aws-creds" = "latest"
 
 # =============================================================================
-# Tools installed from GitHub releases (replaces ubi)
+# Tools installed from GitHub releases
 # =============================================================================
-"ubi:hops-ops/hops-cli" = { version = "latest", rename_exe = "hops" }
-"ubi:unbounded-tech/vnext" = "latest"
-"ubi:harmony-labs/meta" = "latest"
+"github:hops-ops/hops-cli" = { version = "latest", rename_exe = "hops" }
+"github:unbounded-tech/vnext" = "latest"
+"github:harmony-labs/meta" = "latest"
+
+[tools."github:harmony-labs/gitkb-releases"]
+version = "latest"
+
+[tools."github:harmony-labs/gitkb-releases".platforms]
+linux-x64 = { asset_pattern = "gitkb-linux-amd64.tar.gz" }
+linux-arm64 = { asset_pattern = "gitkb-linux-arm64.tar.gz" }
+macos-x64 = { asset_pattern = "gitkb-darwin-amd64.tar.gz" }
+macos-arm64 = { asset_pattern = "gitkb-darwin-arm64.tar.gz" }
 
 # =============================================================================
 # npm global tools

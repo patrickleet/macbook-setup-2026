@@ -40,7 +40,7 @@ Current setup includes:
 
 - Runtimes: Node.js, Python, Rust
 - Infra tools: `kubectl`, `colima`, `docker-cli`, `docker-compose`, `aws-cli`, `jq`, `yq`
-- GitHub release binaries via `ubi`
+- GitHub release binaries via `github:`, including `gitkb`
 - Global npm packages including `typescript` and `@openai/codex`
 
 ### Apps
