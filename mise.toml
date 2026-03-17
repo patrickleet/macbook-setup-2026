@@ -37,6 +37,7 @@ pipx = "latest"
 # =============================================================================
 # Tools installed from GitHub releases
 # =============================================================================
+"github:charmbracelet/glow" = "latest"
 "github:hops-ops/hops-cli" = { version = "latest", rename_exe = "hops" }
 "github:unbounded-tech/vnext" = "latest"
 "github:harmony-labs/meta" = "latest"
