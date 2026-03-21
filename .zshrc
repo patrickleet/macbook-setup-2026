@@ -74,6 +74,19 @@ gacfile() {
   fi
 }
 
+# ── Cached Helm completions ────────────────────────────────────────
+# Regenerates only when helm binary changes
+{
+  local _helm_cache="$HOME/.zsh_helm_completion"
+  local _helm_bin="$(command -v helm 2>/dev/null)"
+  if [[ -n "$_helm_bin" ]]; then
+    if [[ ! -f "$_helm_cache" || "$_helm_bin" -nt "$_helm_cache" ]]; then
+      helm completion zsh >| "$_helm_cache" 2>/dev/null
+    fi
+    source "$_helm_cache"
+  fi
+}
+
 # ── Plugins (direct source) ────────────────────────────────────────
 source ~/.antigen/bundles/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
 # syntax-highlighting must be last

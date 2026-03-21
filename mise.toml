@@ -19,6 +19,8 @@ rust = "latest"
 # =============================================================================
 jq = "latest"
 kubectl = "latest"
+helm = "latest"
+"aqua:txn2/kubefwd" = "latest"
 lima = "latest"
 colima = "latest"
 docker-cli = "latest"
