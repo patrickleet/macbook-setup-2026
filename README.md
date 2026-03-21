@@ -39,7 +39,7 @@ CLI tools and runtimes are managed through [`mise.toml`](/Users/patrickleet/dev/
 Current setup includes:
 
 - Runtimes: Node.js, Python, Rust
-- Direct binary tools via `http:`, including Upbound `up`
+- Direct binary tools via `http:`, including Upbound `up` and Crossplane CLI
 - Infra tools: `kubectl`, `colima`, `docker-cli`, `docker-compose`, `aws-cli`, `gh`, `jq`, `yq`
 - Python CLI tools via `pipx`, including `gimme-aws-creds` and `git-filter-repo`
 - GitHub release binaries via `github:`, including `glow` and `gitkb`
