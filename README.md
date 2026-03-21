@@ -8,6 +8,7 @@ This repo installs the base developer setup I actually use:
 - Git config + SSH key
 - Homebrew for GUI apps
 - `mise` for runtimes and CLI tools
+- `krew` plus the `ctx` and `ns` `kubectl` plugins
 - Claude Code
 - Zsh plugins + repo-managed `.zshrc`
 
@@ -27,8 +28,9 @@ The script will:
 4. Create an SSH key and copy the public key to your clipboard
 5. Clone this repo into `~/dev/macbook-setup`
 6. Install `mise` and all tools from [`mise.toml`](/Users/patrickleet/dev/macbook-setup/mise.toml)
-7. Install GUI apps from [`Brewfile`](/Users/patrickleet/dev/macbook-setup/Brewfile)
-8. Install Zsh plugins and symlink [`.zshrc`](/Users/patrickleet/dev/macbook-setup/.zshrc) to `~/.zshrc`
+7. Install `krew` and the `ctx` / `ns` `kubectl` plugins
+8. Install GUI apps from [`Brewfile`](/Users/patrickleet/dev/macbook-setup/Brewfile)
+9. Install Zsh plugins and symlink [`.zshrc`](/Users/patrickleet/dev/macbook-setup/.zshrc) to `~/.zshrc`
 
 ## What gets installed
 
@@ -41,6 +43,7 @@ Current setup includes:
 - Runtimes: Node.js, Python, Rust
 - Direct binary tools via `http:`, including Upbound `up` and Crossplane CLI
 - Infra tools: `kubectl`, `helm`, `kubefwd`, `lima`, `colima`, `docker-cli`, `docker-compose`, `aws-cli`, `gh`, `jq`, `yq`
+- `krew` plus the `ctx` and `ns` `kubectl` plugins, installed by [`init.sh`](/Users/patrickleet/dev/macbook-setup/init.sh)
 - Python CLI tools via `pipx`, including `gimme-aws-creds` and `git-filter-repo`
 - GitHub release binaries via `github:`, including `glow` and `gitkb`
 - Global npm packages including `typescript` and `@openai/codex`
@@ -73,6 +76,8 @@ The repo-managed [`.zshrc`](/Users/patrickleet/dev/macbook-setup/.zshrc) sets up
 - `zsh-autosuggestions`
 - `zsh-syntax-highlighting`
 - `mise` shell activation
+- AWS CLI tab completion for `aws`
+- `~/.krew/bin` on `PATH`
 - A few personal aliases and helper functions
 
 ## Updating the setup

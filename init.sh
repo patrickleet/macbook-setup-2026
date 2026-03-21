@@ -138,7 +138,51 @@ mise install --yes
 done_msg "All mise tools installed"
 
 # =============================================================================
-# 8. Claude Code (standalone installer)
+# 8. Krew + kubectl plugins
+# =============================================================================
+step "Krew"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+if command -v kubectl-krew &>/dev/null; then
+  done_msg "Already installed"
+else
+  (
+    set -e
+    cd "$(mktemp -d)"
+    OS="$(uname | tr '[:upper:]' '[:lower:]')"
+    ARCH="$(uname -m)"
+    case "$ARCH" in
+      x86_64|amd64)
+        ARCH="amd64"
+        ;;
+      arm64|aarch64)
+        ARCH="arm64"
+        ;;
+    esac
+    KREW="krew-${OS}_${ARCH}"
+    curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz"
+    tar zxf "${KREW}.tar.gz"
+    ./"${KREW}" install krew
+  )
+  done_msg "Installed"
+fi
+
+step "kubectl plugins via krew"
+if kubectl krew list | grep -qx "ctx"; then
+  done_msg "ctx already installed"
+else
+  kubectl krew install ctx
+  done_msg "Installed ctx"
+fi
+
+if kubectl krew list | grep -qx "ns"; then
+  done_msg "ns already installed"
+else
+  kubectl krew install ns
+  done_msg "Installed ns"
+fi
+
+# =============================================================================
+# 9. Claude Code (standalone installer)
 # =============================================================================
 step "Claude Code"
 if command -v claude &>/dev/null; then
@@ -149,14 +193,14 @@ else
 fi
 
 # =============================================================================
-# 9. GUI apps via Homebrew casks
+# 10. GUI apps via Homebrew casks
 # =============================================================================
 step "GUI apps (Homebrew casks)"
 brew bundle --file="$SETUP_DIR/Brewfile"
 done_msg "GUI apps installed"
 
 # =============================================================================
-# 10. Zsh plugins (direct source, no plugin manager)
+# 11. Zsh plugins (direct source, no plugin manager)
 # =============================================================================
 step "Zsh plugins"
 ANTIGEN_DIR="$HOME/.antigen/bundles"
@@ -179,7 +223,7 @@ clone_if_missing "zsh-users/zsh-autosuggestions"
 clone_if_missing "zsh-users/zsh-syntax-highlighting"
 
 # =============================================================================
-# 11. Shell config
+# 12. Shell config
 # =============================================================================
 step "Shell config (.zshrc)"
 ln -sf "$SETUP_DIR/.zshrc" "$HOME/.zshrc"

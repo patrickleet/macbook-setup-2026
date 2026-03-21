@@ -5,7 +5,7 @@ fi
 
 # ── PATH ────────────────────────────────────────────────────────────
 typeset -U path  # deduplicate PATH entries
-export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.krew/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
 # ── Docker Host ────────────────────────────────────────────────────
@@ -41,6 +41,8 @@ if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
 else
   compinit -C
 fi
+autoload -Uz bashcompinit
+bashcompinit
 
 # ── oh-my-zsh plugins (direct source, no framework overhead) ──────
 source ~/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/git/git.plugin.zsh
@@ -86,6 +88,11 @@ gacfile() {
     source "$_helm_cache"
   fi
 }
+
+# ── AWS CLI completions ────────────────────────────────────────────
+if command -v aws_completer &>/dev/null; then
+  complete -C "$(command -v aws_completer)" aws
+fi
 
 # ── Plugins (direct source) ────────────────────────────────────────
 source ~/.antigen/bundles/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
