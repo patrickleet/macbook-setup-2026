@@ -43,6 +43,15 @@ pipx = "latest"
 "github:unbounded-tech/vnext" = "latest"
 "github:harmony-labs/meta" = "latest"
 
+[tools."http:up"]
+version = "current"
+
+[tools."http:up".platforms]
+linux-x64 = { url = "https://cli.upbound.io/stable/{{version}}/bin/linux_amd64/up", bin = "up" }
+linux-arm64 = { url = "https://cli.upbound.io/stable/{{version}}/bin/linux_arm64/up", bin = "up" }
+macos-x64 = { url = "https://cli.upbound.io/stable/{{version}}/bin/darwin_amd64/up", bin = "up" }
+macos-arm64 = { url = "https://cli.upbound.io/stable/{{version}}/bin/darwin_arm64/up", bin = "up" }
+
 [tools."github:harmony-labs/gitkb-releases"]
 version = "latest"
 
