@@ -6,7 +6,7 @@ This repo installs the base developer setup I actually use:
 
 - Xcode Command Line Tools
 - Git config + SSH key
-- Homebrew for GUI apps
+- Homebrew for GUI apps and a small number of CLI formulas
 - `mise` for runtimes and CLI tools
 - `krew` plus the `ctx` and `ns` `kubectl` plugins
 - Claude Code
@@ -36,7 +36,7 @@ The script will:
 
 ### CLI tools
 
-CLI tools and runtimes are managed through [`mise.toml`](/Users/patrickleet/dev/macbook-setup/mise.toml).
+Most CLI tools and runtimes are managed through [`mise.toml`](/Users/patrickleet/dev/macbook-setup/mise.toml).
 
 Current setup includes:
 
@@ -49,9 +49,13 @@ Current setup includes:
 - Global npm packages including `typescript` and `@openai/codex`
 - Standalone CLIs installed by [`init.sh`](/Users/patrickleet/dev/macbook-setup/init.sh), including Claude Code
 
+Homebrew also manages a small number of CLI formulas that are not available through the current `mise` setup:
+
+- `watch`
+
 ### Apps
 
-GUI apps are managed through [`Brewfile`](/Users/patrickleet/dev/macbook-setup/Brewfile).
+GUI apps and a few Homebrew-managed CLI exceptions are managed through [`Brewfile`](/Users/patrickleet/dev/macbook-setup/Brewfile).
 
 Current casks include:
 
@@ -66,6 +70,10 @@ Current casks include:
 - Adobe Creative Cloud
 - CrossOver
 - ProtonVPN
+
+Current formula exceptions include:
+
+- `watch`
 
 ### Shell setup
 
@@ -99,7 +107,7 @@ ln -sf ~/dev/macbook-setup/.zshrc ~/.zshrc
 ~/dev/macbook-setup/scripts/update-tools.sh
 ```
 
-That script runs `mise self-update`, `mise upgrade --yes`, `mise prune --yes`, `brew update`, `brew upgrade`, and also refreshes `krew` plugins plus the directly cloned Zsh plugin repos under `~/.antigen/bundles`.
+That script runs `mise self-update`, `mise upgrade --yes`, `mise prune --yes`, `brew update`, `brew bundle --file=~/dev/macbook-setup/Brewfile`, `brew upgrade`, and also refreshes `krew` plugins plus the directly cloned Zsh plugin repos under `~/.antigen/bundles`.
 
 To enable background updates on macOS login and every 24 hours, install the included LaunchAgent:
 

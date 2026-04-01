@@ -1,7 +1,10 @@
 # =============================================================================
-# Brewfile — GUI apps only (casks + Mac App Store)
-# mise handles all CLI tools — this is just for .app bundles
+# Brewfile — GUI apps plus Homebrew-managed exceptions
+# mise handles most CLI tools; Homebrew covers GUI apps and formulas not in mise
 # =============================================================================
+
+# --- CLI tools ---
+brew "watch"
 
 # --- Browsers ---
 cask "arc"

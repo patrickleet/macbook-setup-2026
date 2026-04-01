@@ -51,7 +51,7 @@ else
 fi
 
 # =============================================================================
-# 3. Homebrew (for GUI apps only)
+# 3. Homebrew (for GUI apps and formula exceptions)
 # =============================================================================
 step "Homebrew"
 if command -v brew &>/dev/null; then
@@ -195,9 +195,9 @@ fi
 # =============================================================================
 # 10. GUI apps via Homebrew casks
 # =============================================================================
-step "GUI apps (Homebrew casks)"
+step "Homebrew apps and formula exceptions"
 brew bundle --file="$SETUP_DIR/Brewfile"
-done_msg "GUI apps installed"
+done_msg "Homebrew bundle installed"
 
 # =============================================================================
 # 11. Zsh plugins (direct source, no plugin manager)

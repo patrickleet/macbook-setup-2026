@@ -54,6 +54,9 @@ if command -v brew >/dev/null 2>&1; then
   log_step "Updating Homebrew metadata"
   run_with_prefix "brew" brew update
 
+  log_step "Syncing Homebrew bundle from $SETUP_DIR/Brewfile"
+  run_with_prefix "brew" brew bundle --file="$SETUP_DIR/Brewfile"
+
   log_step "Upgrading Homebrew packages"
   run_with_prefix "brew" brew upgrade
 fi
