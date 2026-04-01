@@ -86,11 +86,28 @@ Edit the source files in this repo, then re-run the relevant install step:
 
 ```bash
 mise install
+./scripts/update-tools.sh
 brew bundle --file=~/dev/macbook-setup/Brewfile
 ln -sf ~/dev/macbook-setup/.zshrc ~/.zshrc
 ```
 
 `init.sh` can also be re-run safely on an existing machine. It checks for existing installs and updates the cloned repo when possible.
+
+`mise install` installs missing tools from [`mise.toml`](/Users/patrickleet/dev/macbook-setup/mise.toml), but it does not continuously re-resolve `version = "latest"` entries after the first install. To refresh those to newer upstream releases, run:
+
+```bash
+~/dev/macbook-setup/scripts/update-tools.sh
+```
+
+That script runs `mise self-update`, `mise upgrade --yes`, `mise prune --yes`, and also refreshes `krew` plugins when `krew` is installed.
+
+To enable background updates on macOS login and every 24 hours, install the included LaunchAgent:
+
+```bash
+~/dev/macbook-setup/scripts/install-mise-auto-updates.sh
+```
+
+It writes `~/Library/LaunchAgents/com.patrickleet.macbook-setup.mise-updates.plist` and logs to `~/Library/Logs/macbook-setup-mise-updates*.log`.
 
 ## Files
 

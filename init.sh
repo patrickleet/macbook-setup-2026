@@ -230,6 +230,18 @@ ln -sf "$SETUP_DIR/.zshrc" "$HOME/.zshrc"
 done_msg "Linked .zshrc → ~/.zshrc"
 
 # =============================================================================
+# 13. Optional mise auto-updates
+# =============================================================================
+step "mise auto-updates"
+read -r -p "  Install background auto-updates for mise-managed tools? [Y/n] " INSTALL_MISE_AUTO_UPDATES
+if [[ ! "$INSTALL_MISE_AUTO_UPDATES" =~ ^[Nn] ]]; then
+  "$SETUP_DIR/scripts/install-mise-auto-updates.sh"
+  done_msg "Installed LaunchAgent for mise auto-updates"
+else
+  done_msg "Skipped"
+fi
+
+# =============================================================================
 # Done!
 # =============================================================================
 echo ""
@@ -238,6 +250,9 @@ echo ""
 echo "  Your config lives in: ${bold}$SETUP_DIR${normal}"
 echo "  Edit ${bold}mise.toml${normal} to add/remove dev tools"
 echo "  Edit ${bold}Brewfile${normal} to add/remove GUI apps"
-echo "  Then run: ${bold}mise install${normal} or ${bold}brew bundle${normal}"
+echo "  Install missing tools: ${bold}mise install${normal}"
+echo "  Upgrade mise-managed tools: ${bold}$SETUP_DIR/scripts/update-tools.sh${normal}"
+echo "  Manage auto-updates: ${bold}$SETUP_DIR/scripts/install-mise-auto-updates.sh${normal}"
+echo "  Sync GUI apps: ${bold}brew bundle --file=$SETUP_DIR/Brewfile${normal}"
 echo ""
 echo "  ${bold}Restart your terminal to pick up all changes.${normal}"
