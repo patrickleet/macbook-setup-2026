@@ -230,13 +230,13 @@ ln -sf "$SETUP_DIR/.zshrc" "$HOME/.zshrc"
 done_msg "Linked .zshrc → ~/.zshrc"
 
 # =============================================================================
-# 13. Optional mise auto-updates
+# 13. Optional auto-updates
 # =============================================================================
-step "mise auto-updates"
-read -r -p "  Install background auto-updates for mise-managed tools? [Y/n] " INSTALL_MISE_AUTO_UPDATES
+step "auto-updates"
+read -r -p "  Install background auto-updates for dev tools, Homebrew, and Zsh plugins? [Y/n] " INSTALL_MISE_AUTO_UPDATES
 if [[ ! "$INSTALL_MISE_AUTO_UPDATES" =~ ^[Nn] ]]; then
   "$SETUP_DIR/scripts/install-mise-auto-updates.sh"
-  done_msg "Installed LaunchAgent for mise auto-updates"
+  done_msg "Installed LaunchAgent for auto-updates"
 else
   done_msg "Skipped"
 fi

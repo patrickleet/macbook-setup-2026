@@ -99,7 +99,7 @@ ln -sf ~/dev/macbook-setup/.zshrc ~/.zshrc
 ~/dev/macbook-setup/scripts/update-tools.sh
 ```
 
-That script runs `mise self-update`, `mise upgrade --yes`, `mise prune --yes`, and also refreshes `krew` plugins when `krew` is installed.
+That script runs `mise self-update`, `mise upgrade --yes`, `mise prune --yes`, `brew update`, `brew upgrade`, and also refreshes `krew` plugins plus the directly cloned Zsh plugin repos under `~/.antigen/bundles`.
 
 To enable background updates on macOS login and every 24 hours, install the included LaunchAgent:
 
