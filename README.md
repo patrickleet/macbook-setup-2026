@@ -104,10 +104,16 @@ That script runs `mise self-update`, `mise upgrade --yes`, `mise prune --yes`, `
 To enable background updates on macOS login and every 24 hours, install the included LaunchAgent:
 
 ```bash
-~/dev/macbook-setup/scripts/install-mise-auto-updates.sh
+~/dev/macbook-setup/scripts/install-auto-updates.sh
 ```
 
 It writes `~/Library/LaunchAgents/com.patrickleet.macbook-setup.mise-updates.plist` and logs to `~/Library/Logs/macbook-setup-mise-updates*.log`.
+
+To remove that LaunchAgent later:
+
+```bash
+~/dev/macbook-setup/scripts/uninstall-auto-updates.sh
+```
 
 ## Files
 

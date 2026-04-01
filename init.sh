@@ -235,7 +235,7 @@ done_msg "Linked .zshrc → ~/.zshrc"
 step "auto-updates"
 read -r -p "  Install background auto-updates for dev tools, Homebrew, and Zsh plugins? [Y/n] " INSTALL_MISE_AUTO_UPDATES
 if [[ ! "$INSTALL_MISE_AUTO_UPDATES" =~ ^[Nn] ]]; then
-  "$SETUP_DIR/scripts/install-mise-auto-updates.sh"
+  "$SETUP_DIR/scripts/install-auto-updates.sh"
   done_msg "Installed LaunchAgent for auto-updates"
 else
   done_msg "Skipped"
@@ -252,7 +252,8 @@ echo "  Edit ${bold}mise.toml${normal} to add/remove dev tools"
 echo "  Edit ${bold}Brewfile${normal} to add/remove GUI apps"
 echo "  Install missing tools: ${bold}mise install${normal}"
 echo "  Upgrade mise-managed tools: ${bold}$SETUP_DIR/scripts/update-tools.sh${normal}"
-echo "  Manage auto-updates: ${bold}$SETUP_DIR/scripts/install-mise-auto-updates.sh${normal}"
+echo "  Install auto-updates: ${bold}$SETUP_DIR/scripts/install-auto-updates.sh${normal}"
+echo "  Remove auto-updates: ${bold}$SETUP_DIR/scripts/uninstall-auto-updates.sh${normal}"
 echo "  Sync GUI apps: ${bold}brew bundle --file=$SETUP_DIR/Brewfile${normal}"
 echo ""
 echo "  ${bold}Restart your terminal to pick up all changes.${normal}"
