@@ -42,6 +42,9 @@ prepend_mise_bin_paths
 log_step "Updating mise"
 run_with_prefix "mise" mise self-update
 
+log_step "Clearing mise cache"
+run_with_prefix "mise" mise cache clear --yes
+
 log_step "Upgrading tools from $SETUP_DIR/mise.toml"
 run_with_prefix "mise" mise upgrade --yes
 
