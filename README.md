@@ -42,7 +42,7 @@ Current setup includes:
 
 - Runtimes: Node.js, Python, Rust
 - Direct binary tools via `http:`, including Upbound `up` and Crossplane CLI
-- Infra tools: `kubectl`, `helm`, `kubefwd`, `lima`, `colima`, `docker-cli`, `docker-compose`, `aws-cli`, `gh`, `jq`, `yq`
+- Infra tools: `kubectl`, `helm`, `kubefwd`, `lima`, `colima`, `docker-cli`, `docker-compose`, `aws-cli`, `gh`, `jq`, `yq`, `sops`
 - `krew` plus the `ctx` and `ns` `kubectl` plugins, installed by [`init.sh`](/Users/patrickleet/dev/macbook-setup/init.sh)
 - Python CLI tools via `pipx`, including `gimme-aws-creds` and `git-filter-repo`
 - GitHub release binaries via `github:`, including `glow` and `gitkb`

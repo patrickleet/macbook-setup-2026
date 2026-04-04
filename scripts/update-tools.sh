@@ -5,6 +5,10 @@ SETUP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 export PATH="$HOME/.local/bin:$HOME/.krew/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
 
+run_started_at="$(date '+%Y-%m-%d %H:%M:%S %Z')"
+echo "[$run_started_at] update-tools.sh starting"
+echo "[$run_started_at] update-tools.sh starting" >&2
+
 if ! command -v mise >/dev/null 2>&1; then
   echo "mise is not installed or not on PATH"
   exit 1

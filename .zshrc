@@ -60,6 +60,10 @@ gacfile() {
   GIMME_AWS_CREDS_OUTPUT_FORMAT=json gimme-aws-creds -p "$@" | gimme-aws-creds --action-store-json-creds
 }
 
+update_mac_deps() {
+  launchctl kickstart -k "gui/$(id -u)/com.patrickleet.macbook-setup.mise-updates"
+}
+
 # ── Cached kubectl completions ─────────────────────────────────────
 # Regenerates only when kubectl binary changes
 {
