@@ -2,12 +2,46 @@
 set -euo pipefail
 
 SETUP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+AUTO_MODE=0
+if [[ "${1-}" == "--auto" ]]; then
+  AUTO_MODE=1
+  shift
+fi
+
+LOCK_DIR="${TMPDIR:-/tmp}/macbook-setup-update-tools.lock"
+AUTO_STAMP_DIR="$HOME/Library/Caches/macbook-setup"
+AUTO_STAMP_PATH="$AUTO_STAMP_DIR/last-auto-update-epoch"
+AUTO_MIN_INTERVAL_SECONDS=$((18 * 60 * 60))
 
 export PATH="$HOME/.local/bin:$HOME/.krew/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
 
 run_started_at="$(date '+%Y-%m-%d %H:%M:%S %Z')"
 echo "[$run_started_at] update-tools.sh starting"
 echo "[$run_started_at] update-tools.sh starting" >&2
+
+cleanup() {
+  [[ -d "$LOCK_DIR" ]] && rmdir "$LOCK_DIR"
+}
+
+if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+  echo "Another update-tools.sh run is already in progress; exiting."
+  exit 0
+fi
+trap cleanup EXIT
+
+if (( AUTO_MODE )); then
+  mkdir -p "$AUTO_STAMP_DIR"
+  now_epoch="$(date '+%s')"
+  last_run_epoch=0
+  if [[ -f "$AUTO_STAMP_PATH" ]]; then
+    read -r last_run_epoch < "$AUTO_STAMP_PATH" || last_run_epoch=0
+  fi
+
+  if [[ "$last_run_epoch" =~ ^[0-9]+$ ]] && (( now_epoch - last_run_epoch < AUTO_MIN_INTERVAL_SECONDS )); then
+    echo "Skipping auto-update run; last successful auto-update was too recent."
+    exit 0
+  fi
+fi
 
 if ! command -v mise >/dev/null 2>&1; then
   echo "mise is not installed or not on PATH"
@@ -80,5 +114,9 @@ update_git_repo "$HOME/.antigen/bundles/romkatv/powerlevel10k" "powerlevel10k"
 update_git_repo "$HOME/.antigen/bundles/robbyrussell/oh-my-zsh" "oh-my-zsh"
 update_git_repo "$HOME/.antigen/bundles/zsh-users/zsh-autosuggestions" "zsh-autosuggestions"
 update_git_repo "$HOME/.antigen/bundles/zsh-users/zsh-syntax-highlighting" "zsh-syntax-highlighting"
+
+if (( AUTO_MODE )); then
+  date '+%s' > "$AUTO_STAMP_PATH"
+fi
 
 log_step "Update complete"

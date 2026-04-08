@@ -109,13 +109,13 @@ ln -sf ~/dev/macbook-setup/.zshrc ~/.zshrc
 
 That script runs `mise self-update`, `mise upgrade --yes`, `mise prune --yes`, `brew update`, `brew bundle --file=~/dev/macbook-setup/Brewfile`, `brew upgrade`, and also refreshes `krew` plugins plus the directly cloned Zsh plugin repos under `~/.antigen/bundles`.
 
-To enable background updates on macOS login and every 24 hours, install the included LaunchAgent:
+To enable background updates on macOS, install the included LaunchAgent:
 
 ```bash
 ~/dev/macbook-setup/scripts/install-auto-updates.sh
 ```
 
-It writes `~/Library/LaunchAgents/com.patrickleet.macbook-setup.mise-updates.plist` and logs to `~/Library/Logs/macbook-setup-mise-updates*.log`.
+It writes `~/Library/LaunchAgents/com.patrickleet.macbook-setup.mise-updates.plist` and logs to `~/Library/Logs/macbook-setup-mise-updates*.log`. The agent runs on login and checks hourly at `:15`; the script skips the heavy update work unless the last successful background run was at least 18 hours ago. That makes it much more reliable on a laptop that sleeps.
 
 To remove that LaunchAgent later:
 

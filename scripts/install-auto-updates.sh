@@ -21,13 +21,17 @@ cat > "$PLIST_PATH" <<EOF
   <array>
     <string>/bin/bash</string>
     <string>$SETUP_DIR/scripts/update-tools.sh</string>
+    <string>--auto</string>
   </array>
 
   <key>RunAtLoad</key>
   <true/>
 
-  <key>StartInterval</key>
-  <integer>86400</integer>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Minute</key>
+    <integer>15</integer>
+  </dict>
 
   <key>StandardOutPath</key>
   <string>$STDOUT_LOG</string>
@@ -47,7 +51,7 @@ launchctl load "$PLIST_PATH"
 echo "Installed LaunchAgent:"
 echo "  $PLIST_PATH"
 echo ""
-echo "It will run on login and then every 24 hours."
+echo "It will check hourly at :15, run on login, and skip work if a successful auto-update ran in the last 18 hours."
 echo "Logs:"
 echo "  $STDOUT_LOG"
 echo "  $STDERR_LOG"

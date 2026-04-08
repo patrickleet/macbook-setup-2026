@@ -25,6 +25,10 @@ setopt hist_ignore_space
 setopt hist_verify
 setopt share_history
 
+# ── Key bindings ───────────────────────────────────────────────────
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+
 # Make / and - delimiters for Option+Delete
 WORDCHARS=${WORDCHARS/\//}
 WORDCHARS=${WORDCHARS//-/}
