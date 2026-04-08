@@ -29,9 +29,10 @@ setopt share_history
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
-# Make / and - delimiters for Option+Delete
+# Make /, -, and . delimiters for Option+Delete
 WORDCHARS=${WORDCHARS/\//}
 WORDCHARS=${WORDCHARS//-/}
+WORDCHARS=${WORDCHARS//./}
 
 # ── Directory navigation ───────────────────────────────────────────
 setopt auto_cd
