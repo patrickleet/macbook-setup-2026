@@ -40,12 +40,13 @@ Most CLI tools and runtimes are managed through [`mise.toml`](/Users/patrickleet
 
 Current setup includes:
 
-- Runtimes: Node.js, Python, Rust
+- Runtimes: Node.js, Python, Rust, Go
 - Direct binary tools via `http:`, including Upbound `up` and Crossplane CLI
-- Infra tools: `kubectl`, `helm`, `kubefwd`, `lima`, `colima`, `docker-cli`, `docker-compose`, `aws-cli`, `gh`, `jq`, `yq`, `sops`
+- Infra tools: `kubectl`, `helm`, `kubefwd`, `kn`, `lima`, `colima`, `docker-cli`, `docker-compose`, `aws-cli`, `gh`, `jq`, `yq`, `sops`
 - `krew` plus the `ctx` and `ns` `kubectl` plugins, installed by [`init.sh`](/Users/patrickleet/dev/macbook-setup/init.sh)
 - Python CLI tools via `pipx`, including `gimme-aws-creds` and `git-filter-repo`
-- GitHub release binaries via `github:`, including `glow` and `gitkb`
+- Go-installed CLI tools via `go:`, including `flarectl`
+- GitHub release binaries via `github:`, including `glow`, `gitkb`, `atc`, and `kn`
 - Global npm packages including `typescript` and `@openai/codex`
 - Standalone CLIs installed by [`init.sh`](/Users/patrickleet/dev/macbook-setup/init.sh), including Claude Code
 
@@ -115,7 +116,7 @@ To enable background updates on macOS, install the included LaunchAgent:
 ~/dev/macbook-setup/scripts/install-auto-updates.sh
 ```
 
-It writes `~/Library/LaunchAgents/com.patrickleet.macbook-setup.mise-updates.plist` and logs to `~/Library/Logs/macbook-setup-mise-updates*.log`. The agent runs on login and checks hourly at `:15`; the script skips the heavy update work unless the last successful background run was at least 18 hours ago. That makes it much more reliable on a laptop that sleeps.
+It writes `~/Library/LaunchAgents/com.patrickleet.macbook-setup.mise-updates.plist` and logs to `~/Library/Logs/macbook-setup-mise-updates*.log`. The agent runs on login and hourly at `:15`.
 
 To remove that LaunchAgent later:
 

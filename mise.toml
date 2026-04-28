@@ -13,6 +13,7 @@ auto_install = true
 node = "lts"
 python = "latest"
 rust = "latest"
+go = "latest"
 
 # =============================================================================
 # CLI tools from mise registry
@@ -34,6 +35,11 @@ pipx = "latest"
 "pipx:git-filter-repo" = "latest"
 
 # =============================================================================
+# Go-installed CLI tools
+# =============================================================================
+"go:github.com/cloudflare/cloudflare-go/cmd/flarectl" = "latest"
+
+# =============================================================================
 # npm global tools
 # =============================================================================
 "npm:typescript" = "latest"
@@ -43,7 +49,9 @@ pipx = "latest"
 # Tools installed from GitHub releases
 # =============================================================================
 "github:charmbracelet/glow" = "latest"
+"github:gitkb/atc" = "latest"
 "github:hops-ops/hops-cli" = { version = "latest", rename_exe = "hops" }
+"github:knative/client" = "latest"
 "github:unbounded-tech/vnext" = "latest"
 "github:harmony-labs/meta" = "latest"
 

@@ -5,6 +5,7 @@
 
 # --- CLI tools ---
 brew "watch"
+brew "poppler"
 
 # --- Browsers ---
 cask "arc"
