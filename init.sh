@@ -137,6 +137,11 @@ step "Installing dev tools via mise"
 mise install --yes
 done_msg "All mise tools installed"
 
+# Wire mise-installed docker-compose into Docker's CLI plugin path
+step "Linking docker compose plugin"
+"$SETUP_DIR/scripts/link-docker-cli-plugins.sh"
+done_msg "docker compose plugin linked"
+
 # =============================================================================
 # 8. Krew + kubectl plugins
 # =============================================================================
