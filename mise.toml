@@ -54,6 +54,8 @@ pipx = "latest"
 "github:knative/client" = "latest"
 "github:unbounded-tech/vnext" = "latest"
 "github:harmony-labs/meta" = "latest"
+terraform = "latest"
+actionlint = "latest"
 
 [tools."http:up"]
 version = "current"
