@@ -186,6 +186,13 @@ else
   done_msg "Installed ns"
 fi
 
+if kubectl krew list | grep -qx "oidc-login"; then
+  done_msg "oidc-login already installed"
+else
+  kubectl krew install oidc-login
+  done_msg "Installed oidc-login"
+fi
+
 # =============================================================================
 # 9. Claude Code (standalone installer)
 # =============================================================================

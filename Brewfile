@@ -6,6 +6,10 @@
 # --- CLI tools ---
 brew "watch"
 brew "poppler"
+# docker-buildx is a Docker CLI plugin (multi-arch image builds); brew puts it
+# at the plugin path docker discovers automatically. mise can't manage CLI
+# plugins, so it lives here.
+brew "docker-buildx"
 
 # --- Browsers ---
 cask "arc"
