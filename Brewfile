@@ -10,6 +10,7 @@ brew "poppler"
 # at the plugin path docker discovers automatically. mise can't manage CLI
 # plugins, so it lives here.
 brew "docker-buildx"
+brew "tree"
 
 # --- Browsers ---
 cask "arc"

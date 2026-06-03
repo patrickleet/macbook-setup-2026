@@ -137,6 +137,11 @@ step "Installing dev tools via mise"
 mise install --yes
 done_msg "All mise tools installed"
 
+# Repair any Go internal tool binaries omitted by the downloaded toolchain.
+step "Repairing Go toolchain"
+"$SETUP_DIR/scripts/repair-go-tools.sh"
+done_msg "Go toolchain repaired"
+
 # Wire mise-installed docker-compose into Docker's CLI plugin path
 step "Linking docker compose plugin"
 "$SETUP_DIR/scripts/link-docker-cli-plugins.sh"

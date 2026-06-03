@@ -75,10 +75,10 @@ linux-arm64 = { url = "https://releases.crossplane.io/stable/{{version}}/bin/lin
 macos-x64 = { url = "https://releases.crossplane.io/stable/{{version}}/bin/darwin_amd64/crank", bin = "crossplane" }
 macos-arm64 = { url = "https://releases.crossplane.io/stable/{{version}}/bin/darwin_arm64/crank", bin = "crossplane" }
 
-[tools."github:harmony-labs/gitkb-releases"]
+[tools."github:gitkb/gitkb-releases"]
 version = "latest"
 
-[tools."github:harmony-labs/gitkb-releases".platforms]
+[tools."github:gitkb/gitkb-releases".platforms]
 linux-x64 = { asset_pattern = "gitkb-linux-amd64.tar.gz" }
 linux-arm64 = { asset_pattern = "gitkb-linux-arm64.tar.gz" }
 macos-x64 = { asset_pattern = "gitkb-darwin-amd64.tar.gz" }

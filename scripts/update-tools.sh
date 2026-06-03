@@ -70,6 +70,9 @@ run_with_prefix "mise" mise upgrade --yes
 log_step "Pruning unused mise installs"
 run_with_prefix "mise" mise prune --yes
 
+log_step "Repairing Go toolchain"
+run_with_prefix "go-tools" "$SETUP_DIR/scripts/repair-go-tools.sh"
+
 prepend_mise_bin_paths
 
 log_step "Refreshing docker compose plugin link"

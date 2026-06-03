@@ -95,6 +95,7 @@ Edit the source files in this repo, then re-run the relevant install step:
 
 ```bash
 mise install
+./scripts/repair-go-tools.sh
 ./scripts/update-tools.sh
 brew bundle --file=~/dev/macbook-setup/Brewfile
 ln -sf ~/dev/macbook-setup/.zshrc ~/.zshrc
@@ -108,7 +109,7 @@ ln -sf ~/dev/macbook-setup/.zshrc ~/.zshrc
 ~/dev/macbook-setup/scripts/update-tools.sh
 ```
 
-That script runs `mise self-update`, `mise upgrade --yes`, `mise prune --yes`, `brew update`, `brew bundle --file=~/dev/macbook-setup/Brewfile`, `brew upgrade`, and also refreshes `krew` plugins plus the directly cloned Zsh plugin repos under `~/.antigen/bundles`.
+That script runs `mise self-update`, `mise upgrade --yes`, `mise prune --yes`, repairs missing Go internal tools, `brew update`, `brew bundle --file=~/dev/macbook-setup/Brewfile`, `brew upgrade`, and also refreshes `krew` plugins plus the directly cloned Zsh plugin repos under `~/.antigen/bundles`.
 
 To enable background updates on macOS, install the included LaunchAgent:
 
@@ -127,6 +128,7 @@ To remove that LaunchAgent later:
 ## Files
 
 - [`init.sh`](/Users/patrickleet/dev/macbook-setup/init.sh): bootstrap script
+- [`scripts/repair-go-tools.sh`](/Users/patrickleet/dev/macbook-setup/scripts/repair-go-tools.sh): rebuilds missing Go internal tool binaries after mise installs Go
 - [`mise.toml`](/Users/patrickleet/dev/macbook-setup/mise.toml): runtimes and CLI tools
 - [`Brewfile`](/Users/patrickleet/dev/macbook-setup/Brewfile): GUI apps
 - [`.zshrc`](/Users/patrickleet/dev/macbook-setup/.zshrc): shell config symlinked into the home directory
