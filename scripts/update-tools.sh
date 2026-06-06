@@ -78,6 +78,9 @@ prepend_mise_bin_paths
 log_step "Refreshing docker compose plugin link"
 run_with_prefix "docker-compose" "$SETUP_DIR/scripts/link-docker-cli-plugins.sh"
 
+log_step "Refreshing Webwright"
+run_with_prefix "webwright" "$SETUP_DIR/scripts/install-webwright.sh"
+
 if command -v brew >/dev/null 2>&1; then
   log_step "Updating Homebrew metadata"
   run_with_prefix "brew" brew update

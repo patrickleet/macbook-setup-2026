@@ -210,14 +210,21 @@ else
 fi
 
 # =============================================================================
-# 10. GUI apps via Homebrew casks
+# 10. Webwright
+# =============================================================================
+step "Webwright"
+"$SETUP_DIR/scripts/install-webwright.sh"
+done_msg "Webwright installed"
+
+# =============================================================================
+# 11. GUI apps via Homebrew casks
 # =============================================================================
 step "Homebrew apps and formula exceptions"
 brew bundle --file="$SETUP_DIR/Brewfile"
 done_msg "Homebrew bundle installed"
 
 # =============================================================================
-# 11. Zsh plugins (direct source, no plugin manager)
+# 12. Zsh plugins (direct source, no plugin manager)
 # =============================================================================
 step "Zsh plugins"
 ANTIGEN_DIR="$HOME/.antigen/bundles"
@@ -240,14 +247,14 @@ clone_if_missing "zsh-users/zsh-autosuggestions"
 clone_if_missing "zsh-users/zsh-syntax-highlighting"
 
 # =============================================================================
-# 12. Shell config
+# 13. Shell config
 # =============================================================================
 step "Shell config (.zshrc)"
 ln -sf "$SETUP_DIR/.zshrc" "$HOME/.zshrc"
 done_msg "Linked .zshrc → ~/.zshrc"
 
 # =============================================================================
-# 13. Optional auto-updates
+# 14. Optional auto-updates
 # =============================================================================
 step "auto-updates"
 read -r -p "  Install background auto-updates for dev tools, Homebrew, and Zsh plugins? [Y/n] " INSTALL_MISE_AUTO_UPDATES

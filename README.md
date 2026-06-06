@@ -10,6 +10,7 @@ This repo installs the base developer setup I actually use:
 - `mise` for runtimes and CLI tools
 - `krew` plus the `ctx`, `ns`, and `oidc-login` `kubectl` plugins
 - Claude Code
+- Webwright runtime plus Codex and Claude Code plugins
 - Zsh plugins + repo-managed `.zshrc`
 
 ## Quick start
@@ -29,8 +30,10 @@ The script will:
 5. Clone this repo into `~/dev/macbook-setup`
 6. Install `mise` and all tools from [`mise.toml`](/Users/patrickleet/dev/macbook-setup/mise.toml)
 7. Install `krew` and the `ctx` / `ns` / `oidc-login` `kubectl` plugins
-8. Install GUI apps from [`Brewfile`](/Users/patrickleet/dev/macbook-setup/Brewfile)
-9. Install Zsh plugins and symlink [`.zshrc`](/Users/patrickleet/dev/macbook-setup/.zshrc) to `~/.zshrc`
+8. Install Claude Code
+9. Install Webwright and register its Codex / Claude Code plugins
+10. Install GUI apps from [`Brewfile`](/Users/patrickleet/dev/macbook-setup/Brewfile)
+11. Install Zsh plugins and symlink [`.zshrc`](/Users/patrickleet/dev/macbook-setup/.zshrc) to `~/.zshrc`
 
 ## What gets installed
 
@@ -49,6 +52,9 @@ Current setup includes:
 - GitHub release binaries via `github:`, including `glow`, `gitkb`, `atc`, and `kn`
 - Global npm packages including `typescript` and `@openai/codex`
 - Standalone CLIs installed by [`init.sh`](/Users/patrickleet/dev/macbook-setup/init.sh), including Claude Code
+- Webwright from `microsoft/Webwright`, installed by [`scripts/install-webwright.sh`](/Users/patrickleet/dev/macbook-setup/scripts/install-webwright.sh) into the mise-managed Python environment with Chromium and Firefox Playwright browsers
+
+[`scripts/install-webwright.sh`](/Users/patrickleet/dev/macbook-setup/scripts/install-webwright.sh) also registers Webwright for Codex and Claude Code, then installs `webwright@webwright` for both tools when their CLIs are available. Codex uses a generated local marketplace at `~/.local/share/webwright-codex-marketplace` that points to the `~/dev/Webwright` checkout.
 
 Homebrew also manages a small number of CLI formulas that are not available through the current `mise` setup:
 
@@ -96,6 +102,7 @@ Edit the source files in this repo, then re-run the relevant install step:
 ```bash
 mise install
 ./scripts/repair-go-tools.sh
+./scripts/install-webwright.sh
 ./scripts/update-tools.sh
 brew bundle --file=~/dev/macbook-setup/Brewfile
 ln -sf ~/dev/macbook-setup/.zshrc ~/.zshrc
@@ -109,7 +116,7 @@ ln -sf ~/dev/macbook-setup/.zshrc ~/.zshrc
 ~/dev/macbook-setup/scripts/update-tools.sh
 ```
 
-That script runs `mise self-update`, `mise upgrade --yes`, `mise prune --yes`, repairs missing Go internal tools, `brew update`, `brew bundle --file=~/dev/macbook-setup/Brewfile`, `brew upgrade`, and also refreshes `krew` plugins plus the directly cloned Zsh plugin repos under `~/.antigen/bundles`.
+That script runs `mise self-update`, `mise upgrade --yes`, `mise prune --yes`, repairs missing Go internal tools, refreshes Webwright, `brew update`, `brew bundle --file=~/dev/macbook-setup/Brewfile`, `brew upgrade`, and also refreshes `krew` plugins plus the directly cloned Zsh plugin repos under `~/.antigen/bundles`.
 
 To enable background updates on macOS, install the included LaunchAgent:
 
@@ -128,6 +135,7 @@ To remove that LaunchAgent later:
 ## Files
 
 - [`init.sh`](/Users/patrickleet/dev/macbook-setup/init.sh): bootstrap script
+- [`scripts/install-webwright.sh`](/Users/patrickleet/dev/macbook-setup/scripts/install-webwright.sh): installs or refreshes Webwright runtime and agent plugins
 - [`scripts/repair-go-tools.sh`](/Users/patrickleet/dev/macbook-setup/scripts/repair-go-tools.sh): rebuilds missing Go internal tool binaries after mise installs Go
 - [`mise.toml`](/Users/patrickleet/dev/macbook-setup/mise.toml): runtimes and CLI tools
 - [`Brewfile`](/Users/patrickleet/dev/macbook-setup/Brewfile): GUI apps
