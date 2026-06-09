@@ -111,6 +111,11 @@ source ~/.antigen/bundles/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlight
 # ── mise (dev tool manager) ────────────────────────────────────────
 eval "$(~/.local/bin/mise activate zsh)"
 
+# ── direnv ─────────────────────────────────────────────────────────
+if command -v direnv &>/dev/null; then
+  eval "$(direnv hook zsh)"
+fi
+
 # ── p10k config ─────────────────────────────────────────────────────
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

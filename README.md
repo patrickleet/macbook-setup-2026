@@ -58,6 +58,10 @@ Current setup includes:
 
 Homebrew also manages a small number of CLI formulas that are not available through the current `mise` setup:
 
+- `direnv`
+- `docker-buildx`
+- `poppler`
+- `tree`
 - `watch`
 
 ### Apps
@@ -80,6 +84,10 @@ Current casks include:
 
 Current formula exceptions include:
 
+- `direnv`
+- `docker-buildx`
+- `poppler`
+- `tree`
 - `watch`
 
 ### Shell setup
@@ -91,6 +99,7 @@ The repo-managed [`.zshrc`](/Users/patrickleet/dev/macbook-setup/.zshrc) sets up
 - `zsh-autosuggestions`
 - `zsh-syntax-highlighting`
 - `mise` shell activation
+- `direnv` shell hook
 - AWS CLI tab completion for `aws`
 - `~/.krew/bin` on `PATH`
 - A few personal aliases and helper functions
