@@ -52,6 +52,7 @@ pipx = "latest"
 "github:gitkb/atc" = "latest"
 "github:hops-ops/hops-cli" = { version = "latest", rename_exe = "hops" }
 "github:knative/client" = "latest"
+"github:nkzw-tech/codiff" = "latest"
 "github:unbounded-tech/vnext" = "latest"
 "github:harmony-labs/meta" = "latest"
 terraform = "latest"
