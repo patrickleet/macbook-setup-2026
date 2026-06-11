@@ -1,12 +1,19 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # ── PATH ────────────────────────────────────────────────────────────
 typeset -U path  # deduplicate PATH entries
 export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.krew/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+
+# ── direnv ─────────────────────────────────────────────────────────
+# Register before p10k instant prompt so the first direnv precmd output
+# happens after p10k has finished capturing startup output.
+if command -v direnv &>/dev/null; then
+  eval "$(direnv hook zsh)"
+fi
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 # ── Docker Host ────────────────────────────────────────────────────
 export DOCKER_HOST=unix:///Users/patrickleet/.colima/default/docker.sock
@@ -110,11 +117,6 @@ source ~/.antigen/bundles/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlight
 
 # ── mise (dev tool manager) ────────────────────────────────────────
 eval "$(~/.local/bin/mise activate zsh)"
-
-# ── direnv ─────────────────────────────────────────────────────────
-if command -v direnv &>/dev/null; then
-  eval "$(direnv hook zsh)"
-fi
 
 # ── p10k config ─────────────────────────────────────────────────────
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
