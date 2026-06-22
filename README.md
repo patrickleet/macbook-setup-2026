@@ -45,7 +45,7 @@ Current setup includes:
 
 - Runtimes: Node.js, Python, Rust, Go
 - Direct binary tools via `http:`, including Upbound `up` and Crossplane CLI
-- Infra tools: `kubectl`, `helm`, `kubefwd`, `kn`, `lima`, `colima`, `docker-cli`, `docker-compose`, `aws-cli`, `gh`, `op`, `jq`, `yq`, `sops`
+- Infra tools: `kubectl`, `helm`, `kubefwd`, `kn`, `lima`, `colima`, `docker-cli`, `docker-compose`, `aws-cli`, `gh`, `op`, `stripe-cli`, `jq`, `yq`, `sops`
 - `krew` plus the `ctx`, `ns`, and `oidc-login` `kubectl` plugins, installed by [`init.sh`](/Users/patrickleet/dev/macbook-setup/init.sh)
 - Python CLI tools via `pipx`, including `gimme-aws-creds` and `git-filter-repo`
 - Go-installed CLI tools via `go:`, including `flarectl`
