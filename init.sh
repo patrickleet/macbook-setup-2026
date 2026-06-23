@@ -142,6 +142,11 @@ step "Repairing Go toolchain"
 "$SETUP_DIR/scripts/repair-go-tools.sh"
 done_msg "Go toolchain repaired"
 
+# Repair codex's platform binary when npm skips its aliased optional dependency.
+step "Repairing codex binary"
+"$SETUP_DIR/scripts/repair-codex-binary.sh"
+done_msg "codex binary repaired"
+
 # Wire mise-installed docker-compose into Docker's CLI plugin path
 step "Linking docker compose plugin"
 "$SETUP_DIR/scripts/link-docker-cli-plugins.sh"

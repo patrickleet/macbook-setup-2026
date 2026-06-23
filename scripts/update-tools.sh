@@ -73,6 +73,9 @@ run_with_prefix "mise" mise prune --yes
 log_step "Repairing Go toolchain"
 run_with_prefix "go-tools" "$SETUP_DIR/scripts/repair-go-tools.sh"
 
+log_step "Repairing codex binary"
+run_with_prefix "codex" "$SETUP_DIR/scripts/repair-codex-binary.sh"
+
 prepend_mise_bin_paths
 
 log_step "Refreshing docker compose plugin link"
