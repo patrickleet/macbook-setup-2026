@@ -3,6 +3,13 @@ typeset -U path  # deduplicate PATH entries
 export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.krew/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
+# ── mise (dev tool manager) ────────────────────────────────────────
+# Keep before p10k instant prompt: auto-install/status output during hook-env
+# would otherwise trip Powerlevel10k's startup-output warning.
+if [[ -x "$HOME/.local/bin/mise" ]]; then
+  eval "$("$HOME/.local/bin/mise" activate zsh)"
+fi
+
 # ── direnv ─────────────────────────────────────────────────────────
 # Register before p10k instant prompt so the first direnv precmd output
 # happens after p10k has finished capturing startup output.
@@ -114,9 +121,6 @@ fi
 source ~/.antigen/bundles/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
 # syntax-highlighting must be last
 source ~/.antigen/bundles/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# ── mise (dev tool manager) ────────────────────────────────────────
-eval "$(~/.local/bin/mise activate zsh)"
 
 # ── p10k config ─────────────────────────────────────────────────────
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
