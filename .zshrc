@@ -11,10 +11,11 @@ if [[ -x "$HOME/.local/bin/mise" ]]; then
 fi
 
 # ── direnv ─────────────────────────────────────────────────────────
-# Register before p10k instant prompt so the first direnv precmd output
-# happens after p10k has finished capturing startup output.
+# Load the initial directory environment before p10k's instant prompt starts
+# watching startup output; keep the hook installed for later directory changes.
 if command -v direnv &>/dev/null; then
   eval "$(direnv hook zsh)"
+  _direnv_hook
 fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
