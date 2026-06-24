@@ -1,6 +1,6 @@
 # ── PATH ────────────────────────────────────────────────────────────
 typeset -U path  # deduplicate PATH entries
-export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.krew/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.krew/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
 # ── mise (dev tool manager) ────────────────────────────────────────
@@ -17,6 +17,15 @@ if command -v direnv &>/dev/null; then
   eval "$(direnv hook zsh)"
   _direnv_hook
 fi
+
+# Keep Cargo-installed binaries ahead of mise-managed release tools.
+_prefer_cargo_bin_path() {
+  path=("$HOME/.cargo/bin" ${path:#$HOME/.cargo/bin})
+}
+_prefer_cargo_bin_path
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _prefer_cargo_bin_path
+add-zsh-hook chpwd _prefer_cargo_bin_path
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
