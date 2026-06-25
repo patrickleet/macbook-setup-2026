@@ -10,6 +10,7 @@ auto_install = true
 # Dev tool runtimes
 # =============================================================================
 [tools]
+pnpm = "latest"
 node = "lts"
 python = "latest"
 rust = "latest"
@@ -32,6 +33,7 @@ aws-cli = "latest"
 gh = "latest"
 op = "latest"
 stripe-cli = "latest"
+flyctl = "latest"
 pipx = "latest"
 "pipx:gimme-aws-creds" = "latest"
 "pipx:git-filter-repo" = "latest"
