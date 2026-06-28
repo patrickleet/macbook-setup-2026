@@ -50,7 +50,7 @@ Current setup includes:
 - Python CLI tools via `pipx`, including `gimme-aws-creds` and `git-filter-repo`
 - Go-installed CLI tools via `go:`, including `flarectl`
 - GitHub release binaries via `github:`, including `glow`, `gitkb`, `atc`, `kn`, and `codiff`
-- Global npm packages including `typescript` and `@openai/codex`
+- Global npm packages including `typescript`, `@openai/codex`, and `@xai-official/grok`
 - Standalone CLIs installed by [`init.sh`](/Users/patrickleet/dev/macbook-setup/init.sh), including Claude Code
 - Webwright from `microsoft/Webwright`, installed by [`scripts/install-webwright.sh`](/Users/patrickleet/dev/macbook-setup/scripts/install-webwright.sh) into the mise-managed Python environment with Chromium and Firefox Playwright browsers
 
