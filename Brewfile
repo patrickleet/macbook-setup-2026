@@ -14,6 +14,18 @@ brew "docker-buildx"
 brew "helm-ls"
 brew "tree"
 
+# --- hops local: kiac backend (Apple silicon k8s via apple/container) ---
+# https://github.com/saiyam1814/kiac — each node is a lightweight VM.
+# hops: `hops local start --backend kiac` → cluster hops, context kiac-hops
+#
+# IMPORTANT: kiac 0.4.0 + apple/container 1.2.x fails node boot
+# (sysctl ip_forward — https://github.com/saiyam1814/kiac/issues/14).
+# Prefer container 1.1.0 from https://github.com/apple/container/releases
+# until that is fixed. `brew install container` currently ships 1.2.x.
+tap "saiyam1814/tap"
+brew "saiyam1814/tap/kiac"
+# brew "container"  # pin 1.1.0 manually for kiac until #14 is fixed
+
 # --- Browsers ---
 cask "arc"
 
