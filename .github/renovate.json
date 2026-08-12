@@ -3,6 +3,11 @@
   "extends": ["config:recommended"],
   "enabledManagers": ["mise", "custom.regex"],
   "updatePinnedDependencies": true,
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 0,
+  "branchConcurrentLimit": 0,
+  "semanticCommits": "enabled",
+  "semanticCommitType": "fix",
   "ignoreDeps": ["github:gitkb/atc", "http:crossplane"],
   "customManagers": [
     {
@@ -30,6 +35,11 @@
     {
       "matchManagers": ["mise"],
       "rangeStrategy": "pin"
+    },
+    {
+      "description": "Use feat for major dependency updates",
+      "matchUpdateTypes": ["major"],
+      "semanticCommitType": "feat"
     }
   ]
 }
