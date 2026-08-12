@@ -261,11 +261,11 @@ done_msg "Linked .zshrc → ~/.zshrc"
 # =============================================================================
 # 14. Optional auto-updates
 # =============================================================================
-step "auto-updates"
-read -r -p "  Install background auto-updates for dev tools, Homebrew, and Zsh plugins? [Y/n] " INSTALL_MISE_AUTO_UPDATES
+step "mise sync service"
+read -r -p "  Install a background service that pulls main and applies pinned mise versions? [Y/n] " INSTALL_MISE_AUTO_UPDATES
 if [[ ! "$INSTALL_MISE_AUTO_UPDATES" =~ ^[Nn] ]]; then
   "$SETUP_DIR/scripts/install-auto-updates.sh"
-  done_msg "Installed LaunchAgent for auto-updates"
+  done_msg "Installed LaunchAgent for mise sync"
 else
   done_msg "Skipped"
 fi
@@ -280,9 +280,9 @@ echo "  Your config lives in: ${bold}$SETUP_DIR${normal}"
 echo "  Edit ${bold}mise.toml${normal} to add/remove dev tools"
 echo "  Edit ${bold}Brewfile${normal} to add/remove GUI apps"
 echo "  Install missing tools: ${bold}mise install${normal}"
-echo "  Upgrade mise-managed tools: ${bold}$SETUP_DIR/scripts/update-tools.sh${normal}"
-echo "  Install auto-updates: ${bold}$SETUP_DIR/scripts/install-auto-updates.sh${normal}"
-echo "  Remove auto-updates: ${bold}$SETUP_DIR/scripts/uninstall-auto-updates.sh${normal}"
+echo "  Apply pinned mise-managed tools: ${bold}$SETUP_DIR/scripts/update-tools.sh${normal}"
+echo "  Install mise sync service: ${bold}$SETUP_DIR/scripts/install-auto-updates.sh${normal}"
+echo "  Remove mise sync service: ${bold}$SETUP_DIR/scripts/uninstall-auto-updates.sh${normal}"
 echo "  Sync GUI apps: ${bold}brew bundle --file=$SETUP_DIR/Brewfile${normal}"
 echo ""
 echo "  ${bold}Restart your terminal to pick up all changes.${normal}"

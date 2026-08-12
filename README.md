@@ -39,7 +39,7 @@ The script will:
 
 ### CLI tools
 
-Most CLI tools and runtimes are managed through [`mise.toml`](/Users/patrickleet/dev/macbook-setup/mise.toml).
+Most CLI tools and runtimes are managed through [`mise.toml`](/Users/patrickleet/dev/macbook-setup/mise.toml), with exact versions tracked in git.
 
 Current setup includes:
 
@@ -49,7 +49,9 @@ Current setup includes:
 - `krew` plus the `ctx`, `ns`, and `oidc-login` `kubectl` plugins, installed by [`init.sh`](/Users/patrickleet/dev/macbook-setup/init.sh)
 - Python CLI tools via `pipx`, including `gimme-aws-creds` and `git-filter-repo`
 - Go-installed CLI tools via `go:`, including `flarectl`
-- GitHub release binaries via `github:`, including `glow`, `gitkb`, `atc`, `kn`, and `codiff`
+- GitHub release binaries via `github:`, including `glow`, `dctl`, `kn`, and `codiff`
+- Local development builds of `git-kb` and `atc` installed through Cargo rather than mise
+- OpenCode via the `opencode` mise registry entry
 - Global npm packages including `typescript`, `@openai/codex`, and `@xai-official/grok`
 - Standalone CLIs installed by [`init.sh`](/Users/patrickleet/dev/macbook-setup/init.sh), including Claude Code
 - Webwright from `microsoft/Webwright`, installed by [`scripts/install-webwright.sh`](/Users/patrickleet/dev/macbook-setup/scripts/install-webwright.sh) into the mise-managed Python environment with Chromium and Firefox Playwright browsers
@@ -119,13 +121,15 @@ ln -sf ~/dev/macbook-setup/.zshrc ~/.zshrc
 
 `init.sh` can also be re-run safely on an existing machine. It checks for existing installs and updates the cloned repo when possible.
 
-`mise install` installs missing tools from [`mise.toml`](/Users/patrickleet/dev/macbook-setup/mise.toml), but it does not continuously re-resolve `version = "latest"` entries after the first install. To refresh those to newer upstream releases, run:
+Versions in [`mise.toml`](/Users/patrickleet/dev/macbook-setup/mise.toml) are pinned. Renovate uses the native `mise` manager from [`.github/renovate.json`](/Users/patrickleet/dev/macbook-setup/.github/renovate.json) to open pull requests when newer releases are available. Install the Renovate GitHub App for this repository to enable those pull requests.
+
+After a Renovate pull request is merged into `main`, the background updater fast-forwards the local checkout to `origin/main` and applies the checked-in versions:
 
 ```bash
 ~/dev/macbook-setup/scripts/update-tools.sh
 ```
 
-That script runs `mise self-update`, `mise upgrade --yes`, `mise prune --yes`, repairs missing Go internal tools, refreshes Webwright, `brew update`, `brew bundle --file=~/dev/macbook-setup/Brewfile`, `brew upgrade`, and also refreshes `krew` plugins plus the directly cloned Zsh plugin repos under `~/.antigen/bundles`.
+That script runs `mise install --yes` and `mise prune --yes`, repairs the dependent binaries and Docker Compose link, and refuses to run when the checkout is not on a clean `main` branch. It does not resolve upstream versions itself or upgrade Homebrew, Webwright, Krew plugins, or Zsh plugin checkouts.
 
 To enable background updates on macOS, install the included LaunchAgent:
 
@@ -133,7 +137,7 @@ To enable background updates on macOS, install the included LaunchAgent:
 ~/dev/macbook-setup/scripts/install-auto-updates.sh
 ```
 
-It writes `~/Library/LaunchAgents/com.patrickleet.macbook-setup.mise-updates.plist` and logs to `~/Library/Logs/macbook-setup-mise-updates*.log`. The agent runs on login and hourly at `:15`.
+It writes `~/Library/LaunchAgents/com.patrickleet.macbook-setup.mise-updates.plist` and logs to `~/Library/Logs/macbook-setup-mise-updates*.log`. The agent runs on login and hourly at `:15`, synchronizing `main` before applying pinned mise versions.
 
 To remove that LaunchAgent later:
 
@@ -146,7 +150,9 @@ To remove that LaunchAgent later:
 - [`init.sh`](/Users/patrickleet/dev/macbook-setup/init.sh): bootstrap script
 - [`scripts/install-webwright.sh`](/Users/patrickleet/dev/macbook-setup/scripts/install-webwright.sh): installs or refreshes Webwright runtime and agent plugins
 - [`scripts/repair-go-tools.sh`](/Users/patrickleet/dev/macbook-setup/scripts/repair-go-tools.sh): rebuilds missing Go internal tool binaries after mise installs Go
+- [`scripts/update-tools.sh`](/Users/patrickleet/dev/macbook-setup/scripts/update-tools.sh): synchronizes clean `main` and applies pinned mise versions
 - [`mise.toml`](/Users/patrickleet/dev/macbook-setup/mise.toml): runtimes and CLI tools
+- [`.github/renovate.json`](/Users/patrickleet/dev/macbook-setup/.github/renovate.json): Renovate configuration for mise dependencies
 - [`Brewfile`](/Users/patrickleet/dev/macbook-setup/Brewfile): GUI apps
 - [`.zshrc`](/Users/patrickleet/dev/macbook-setup/.zshrc): shell config symlinked into the home directory
 

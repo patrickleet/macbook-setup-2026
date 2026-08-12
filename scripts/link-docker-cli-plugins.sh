@@ -8,8 +8,8 @@ set -euo pipefail
 # tool's versioned install path. Docker CLI looks for plugins at
 # ~/.docker/cli-plugins/docker-compose. We symlink one to the other.
 #
-# Safe to re-run after `mise upgrade` — the symlink refreshes to the active
-# version.
+# Safe to re-run after `mise install` applies a new pinned version — the
+# symlink refreshes to the active version.
 
 PLUGIN_DIR="$HOME/.docker/cli-plugins"
 TARGET="$PLUGIN_DIR/docker-compose"

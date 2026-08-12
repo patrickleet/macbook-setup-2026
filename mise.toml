@@ -10,61 +10,66 @@ auto_install = true
 # Dev tool runtimes
 # =============================================================================
 [tools]
-pnpm = "latest"
-node = "lts"
-python = "latest"
-rust = "latest"
-go = "latest"
+pnpm = "11.18.0"
+# Keep Node on the LTS line while letting Renovate update the exact release.
+node = "24.18.1"
+python = "3.14.6"
+rust = "1.97.1"
+go = "1.26.5"
 
 # =============================================================================
 # CLI tools from mise registry
 # =============================================================================
-jq = "latest"
-kubectl = "latest"
-helm = "latest"
-"aqua:txn2/kubefwd" = "latest"
-lima = "latest"
-colima = "latest"
-docker-cli = "latest"
-docker-compose = "latest"
-yq = "latest"
-sops = "latest"
-aws-cli = "latest"
-gh = "latest"
-op = "latest"
-stripe-cli = "latest"
-flyctl = "latest"
-pipx = "latest"
-"pipx:gimme-aws-creds" = "latest"
-"pipx:git-filter-repo" = "latest"
+jq = "1.8.2"
+kubectl = "1.36.3"
+helm = "4.2.3"
+"aqua:txn2/kubefwd" = "1.25.16"
+lima = "2.2.0"
+colima = "0.10.3"
+docker-cli = "29.6.2"
+docker-compose = "5.3.1"
+yq = "4.53.3"
+sops = "3.13.3"
+aws-cli = "2.36.13"
+gh = "2.96.0"
+opencode = "1.18.10"
+op = "2.38.1"
+stripe-cli = "1.44.1"
+flyctl = "0.4.77"
+pipx = "1.16.5"
+"pipx:gimme-aws-creds" = "2.8.2"
+"pipx:git-filter-repo" = "2.47.0"
 
 # =============================================================================
 # Go-installed CLI tools
 # =============================================================================
-"go:github.com/cloudflare/cloudflare-go/cmd/flarectl" = "latest"
+"go:github.com/cloudflare/cloudflare-go/cmd/flarectl" = "0.117.0"
 
 # =============================================================================
 # npm global tools
 # =============================================================================
-"npm:typescript" = "latest"
-"npm:@openai/codex" = "latest"
-"npm:@xai-official/grok" = { version = "latest", npm_args = "--ignore-scripts=false --allow-scripts=@xai-official/grok" }
+"npm:typescript" = "7.0.2"
+"npm:@openai/codex" = "0.146.0"
+"npm:@xai-official/grok" = { version = "1.0.0", npm_args = "--ignore-scripts=false --allow-scripts=@xai-official/grok" }
 
 # =============================================================================
 # Tools installed from GitHub releases
 # =============================================================================
-"github:charmbracelet/glow" = "latest"
-"github:gitkb/atc" = "latest"
-"github:hops-ops/hops-cli" = { version = "latest", rename_exe = "hops" }
-"github:knative/client" = "latest"
-"github:nkzw-tech/codiff" = "latest"
-"github:unbounded-tech/vnext" = "latest"
-"github:harmony-labs/meta" = "latest"
-terraform = "latest"
-actionlint = "latest"
+"github:charmbracelet/glow" = "2.1.2"
+# atc and git-kb are installed through Cargo while under active development.
+# renovate: datasource=github-tags depName=gitkb/atc versioning=semver-coerced
+# "github:gitkb/atc" = "0.1.8"
+"github:hops-ops/hops-cli" = { version = "0.37.1", rename_exe = "hops" }
+"github:hops-ops/distributed" = { version = "3.3.4", minimum_release_age = "0s" }
+"github:knative/client" = "knative-v1.23.0"
+"github:nkzw-tech/codiff" = "1.9.2"
+"github:unbounded-tech/vnext" = "1.16.3"
+"github:harmony-labs/meta" = "0.2.22"
+terraform = "1.15.8"
+actionlint = "1.7.12"
 
 [tools."http:up"]
-version = "current"
+version = "v0.53.0"
 
 [tools."http:up".platforms]
 linux-x64 = { url = "https://cli.upbound.io/stable/{{version}}/bin/linux_amd64/up", bin = "up" }
@@ -72,20 +77,22 @@ linux-arm64 = { url = "https://cli.upbound.io/stable/{{version}}/bin/linux_arm64
 macos-x64 = { url = "https://cli.upbound.io/stable/{{version}}/bin/darwin_amd64/up", bin = "up" }
 macos-arm64 = { url = "https://cli.upbound.io/stable/{{version}}/bin/darwin_arm64/up", bin = "up" }
 
+# Crossplane's CLI is published from its own GitHub releases repository.
+# renovate: datasource=github-releases depName=crossplane/cli versioning=semver
 [tools."http:crossplane"]
-version = "current"
+version = "v2.4.1"
 
 [tools."http:crossplane".platforms]
-linux-x64 = { url = "https://releases.crossplane.io/stable/{{version}}/bin/linux_amd64/crank", bin = "crossplane" }
-linux-arm64 = { url = "https://releases.crossplane.io/stable/{{version}}/bin/linux_arm64/crank", bin = "crossplane" }
-macos-x64 = { url = "https://releases.crossplane.io/stable/{{version}}/bin/darwin_amd64/crank", bin = "crossplane" }
-macos-arm64 = { url = "https://releases.crossplane.io/stable/{{version}}/bin/darwin_arm64/crank", bin = "crossplane" }
+linux-x64 = { url = "https://cli.crossplane.io/stable/{{version}}/bin/linux_amd64/crossplane", bin = "crossplane" }
+linux-arm64 = { url = "https://cli.crossplane.io/stable/{{version}}/bin/linux_arm64/crossplane", bin = "crossplane" }
+macos-x64 = { url = "https://cli.crossplane.io/stable/{{version}}/bin/darwin_amd64/crossplane", bin = "crossplane" }
+macos-arm64 = { url = "https://cli.crossplane.io/stable/{{version}}/bin/darwin_arm64/crossplane", bin = "crossplane" }
 
-[tools."github:gitkb/gitkb-releases"]
-version = "latest"
-
-[tools."github:gitkb/gitkb-releases".platforms]
-linux-x64 = { asset_pattern = "gitkb-linux-amd64.tar.gz" }
-linux-arm64 = { asset_pattern = "gitkb-linux-arm64.tar.gz" }
-macos-x64 = { asset_pattern = "gitkb-darwin-amd64.tar.gz" }
-macos-arm64 = { asset_pattern = "gitkb-darwin-arm64.tar.gz" }
+# [tools."github:gitkb/gitkb-releases"]
+# version = "0.2.14"
+#
+# [tools."github:gitkb/gitkb-releases".platforms]
+# linux-x64 = { asset_pattern = "gitkb-linux-amd64.tar.gz" }
+# linux-arm64 = { asset_pattern = "gitkb-linux-arm64.tar.gz" }
+# macos-x64 = { asset_pattern = "gitkb-darwin-amd64.tar.gz" }
+# macos-arm64 = { asset_pattern = "gitkb-darwin-arm64.tar.gz" }

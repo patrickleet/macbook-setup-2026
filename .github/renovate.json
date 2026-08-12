@@ -1,0 +1,35 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "enabledManagers": ["mise", "custom.regex"],
+  "updatePinnedDependencies": true,
+  "ignoreDeps": ["github:gitkb/atc", "http:crossplane"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^mise\\.toml$/"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=github-tags\\s+depName=gitkb/atc\\s+versioning=semver-coerced\\s*\\n\\s*\\\"github:gitkb/atc\\\"\\s*=\\s*\\\"(?<currentValue>[^\\\"\\s]+)\\\""
+      ],
+      "datasourceTemplate": "github-tags",
+      "depNameTemplate": "gitkb/atc",
+      "versioningTemplate": "semver-coerced"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^mise\\.toml$/"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=github-releases\\s+depName=crossplane/cli\\s+versioning=semver\\s*\\n\\s*\\[tools\\.\\\"http:crossplane\\\"\\]\\s*\\n\\s*version\\s*=\\s*\\\"(?<currentValue>v[^\\\"\\s]+)\\\""
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "crossplane/cli",
+      "versioningTemplate": "semver"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["mise"],
+      "rangeStrategy": "pin"
+    }
+  ]
+}

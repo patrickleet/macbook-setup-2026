@@ -40,35 +40,52 @@ run_with_prefix() {
   return "${PIPESTATUS[0]}"
 }
 
+sync_setup_repo() {
+  local current_branch
+
+  if [[ ! -d "$SETUP_DIR/.git" ]]; then
+    echo "Setup repo is not a git checkout: $SETUP_DIR"
+    exit 1
+  fi
+
+  current_branch="$(git -C "$SETUP_DIR" branch --show-current)"
+  if [[ "$current_branch" != "main" ]]; then
+    echo "Setup repo is on '$current_branch'; refusing to apply anything outside main"
+    exit 1
+  fi
+
+  if [[ -n "$(git -C "$SETUP_DIR" status --porcelain)" ]]; then
+    echo "Setup repo has local changes; refusing to pull or apply them"
+    exit 1
+  fi
+
+  log_step "Fetching origin/main"
+  run_with_prefix "git" git -C "$SETUP_DIR" fetch --prune origin main
+
+  if ! git -C "$SETUP_DIR" merge-base --is-ancestor HEAD origin/main; then
+    echo "Setup repo has local commits that are not in origin/main; refusing to apply them"
+    exit 1
+  fi
+
+  log_step "Fast-forwarding setup repo to origin/main"
+  run_with_prefix "git" git -C "$SETUP_DIR" merge --ff-only origin/main
+}
+
 prepend_mise_bin_paths() {
   local bin_path
   while IFS= read -r bin_path; do
     [[ -n "$bin_path" ]] && export PATH="$bin_path:$PATH"
-  done < <(mise bin-paths)
+  done < <(mise -C "$SETUP_DIR" bin-paths)
 }
 
-update_git_repo() {
-  local repo_path="$1"
-  local label="$2"
-  if [[ -d "$repo_path/.git" ]]; then
-    log_step "Updating $label"
-    run_with_prefix "$label" git -C "$repo_path" pull --ff-only
-  fi
-}
-
+sync_setup_repo
 prepend_mise_bin_paths
 
-log_step "Updating mise"
-run_with_prefix "mise" mise self-update
-
-log_step "Clearing mise cache"
-run_with_prefix "mise" mise cache clear --yes
-
-log_step "Upgrading tools from $SETUP_DIR/mise.toml"
-run_with_prefix "mise" mise upgrade --yes
+log_step "Installing pinned tools from $SETUP_DIR/mise.toml"
+run_with_prefix "mise" mise -C "$SETUP_DIR" install --yes
 
 log_step "Pruning unused mise installs"
-run_with_prefix "mise" mise prune --yes
+run_with_prefix "mise" mise -C "$SETUP_DIR" prune --yes
 
 log_step "Repairing Go toolchain"
 run_with_prefix "go-tools" "$SETUP_DIR/scripts/repair-go-tools.sh"
@@ -81,31 +98,4 @@ prepend_mise_bin_paths
 log_step "Refreshing docker compose plugin link"
 run_with_prefix "docker-compose" "$SETUP_DIR/scripts/link-docker-cli-plugins.sh"
 
-log_step "Refreshing Webwright"
-run_with_prefix "webwright" "$SETUP_DIR/scripts/install-webwright.sh"
-
-if command -v brew >/dev/null 2>&1; then
-  log_step "Updating Homebrew metadata"
-  run_with_prefix "brew" brew update
-
-  log_step "Syncing Homebrew bundle from $SETUP_DIR/Brewfile"
-  run_with_prefix "brew" brew bundle --file="$SETUP_DIR/Brewfile"
-
-  log_step "Upgrading Homebrew packages"
-  run_with_prefix "brew" brew upgrade
-fi
-
-if command -v kubectl >/dev/null 2>&1 && command -v kubectl-krew >/dev/null 2>&1; then
-  log_step "Updating kubectl krew index"
-  run_with_prefix "krew" kubectl krew update
-
-  log_step "Upgrading kubectl krew plugins"
-  run_with_prefix "krew" kubectl krew upgrade
-fi
-
-update_git_repo "$HOME/.antigen/bundles/romkatv/powerlevel10k" "powerlevel10k"
-update_git_repo "$HOME/.antigen/bundles/robbyrussell/oh-my-zsh" "oh-my-zsh"
-update_git_repo "$HOME/.antigen/bundles/zsh-users/zsh-autosuggestions" "zsh-autosuggestions"
-update_git_repo "$HOME/.antigen/bundles/zsh-users/zsh-syntax-highlighting" "zsh-syntax-highlighting"
-
-log_step "Update complete"
+log_step "Pinned tool apply complete"
