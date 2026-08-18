@@ -26,6 +26,10 @@ tap "saiyam1814/tap"
 brew "saiyam1814/tap/kiac"
 # brew "container"  # pin 1.1.0 manually for kiac until #14 is fixed
 
+# --- Containers ---
+tap "augani/dory"
+cask "augani/dory/dory"
+
 # --- Browsers ---
 cask "arc"
 
