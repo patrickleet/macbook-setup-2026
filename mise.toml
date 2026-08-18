@@ -10,7 +10,7 @@ auto_install = true
 # Dev tool runtimes
 # =============================================================================
 [tools]
-pnpm = "11.21.0"
+pnpm = "11.22.0"
 # Keep Node on the LTS line while letting Renovate update the exact release.
 node = "24.19.0"
 python = "3.14.7"
@@ -27,14 +27,14 @@ helm = "4.2.4"
 lima = "2.2.0"
 colima = "0.10.3"
 docker-cli = "29.7.2"
-docker-compose = "5.4.0"
+docker-compose = "5.5.0"
 yq = "4.53.3"
 sops = "3.13.3"
 aws-cli = "2.36.25"
 gh = "2.97.0"
 opencode = "1.18.18"
 op = "2.38.1"
-stripe-cli = "1.45.2"
+stripe-cli = "1.50.1"
 flyctl = "0.4.84"
 pipx = "1.16.7"
 "pipx:gimme-aws-creds" = "2.8.2"
@@ -59,7 +59,7 @@ pipx = "1.16.7"
 # atc and git-kb are installed through Cargo while under active development.
 # renovate: datasource=github-tags depName=gitkb/atc versioning=semver-coerced
 # "github:gitkb/atc" = "0.1.8"
-"github:hops-ops/hops-cli" = { version = "0.40.0", rename_exe = "hops" }
+"github:hops-ops/hops-cli" = { version = "0.41.0", rename_exe = "hops" }
 "github:hops-ops/distributed" = { version = "4.1.1", minimum_release_age = "0s" }
 "github:knative/client" = "knative-v1.23.0"
 "github:nkzw-tech/codiff" = "1.10.1"
