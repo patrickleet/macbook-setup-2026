@@ -78,7 +78,7 @@ macos-arm64 = { url = "https://cli.upbound.io/stable/{{version}}/bin/darwin_arm6
 # Crossplane's CLI is published from its own GitHub releases repository.
 # renovate: datasource=github-releases depName=crossplane/cli versioning=semver
 [tools."http:crossplane"]
-version = "v2.4.1"
+version = "v2.5.0"
 
 [tools."http:crossplane".platforms]
 linux-x64 = { url = "https://cli.crossplane.io/stable/{{version}}/bin/linux_amd64/crossplane", bin = "crossplane" }
