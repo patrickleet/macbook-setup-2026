@@ -33,7 +33,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # ── Docker Host ────────────────────────────────────────────────────
-export DOCKER_HOST=unix:///Users/patrickleet/.colima/default/docker.sock
+# Dory is the default engine. Set DOCKER_HOST so CLIs and SDKs that
+# ignore docker contexts (and would otherwise try /var/run/docker.sock)
+# talk to Dory. Dory injects ~/.dory/bin on PATH when the app starts.
+export DOCKER_HOST="unix://${HOME}/.dory/dory.sock"
 
 # ── Theme (direct source, no plugin manager) ───────────────────────
 source ~/.antigen/bundles/romkatv/powerlevel10k/powerlevel10k.zsh-theme

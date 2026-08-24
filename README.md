@@ -83,6 +83,7 @@ Current casks include:
 - Adobe Creative Cloud
 - CrossOver
 - ProtonVPN
+- Dory (Docker engine; `.zshrc` sets `DOCKER_HOST` to `~/.dory/dory.sock`)
 
 Current formula exceptions include:
 
@@ -104,6 +105,7 @@ The repo-managed [`.zshrc`](/Users/patrickleet/dev/macbook-setup/.zshrc) sets up
 - `direnv` shell hook
 - AWS CLI tab completion for `aws`
 - `~/.krew/bin` on `PATH`
+- `DOCKER_HOST` pointing at Dory (`unix://$HOME/.dory/dory.sock`)
 - A few personal aliases and helper functions
 
 ## Updating the setup
