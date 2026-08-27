@@ -63,7 +63,7 @@ pipx = "1.16.7"
 "github:nkzw-tech/codiff" = "1.10.1"
 "github:unbounded-tech/vnext" = "1.16.5"
 "github:harmony-labs/meta" = "0.2.22"
-terraform = "1.15.9"
+terraform = "1.16.0"
 actionlint = "1.7.12"
 
 [tools."http:up"]
