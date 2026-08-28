@@ -57,7 +57,7 @@ pipx = "1.16.7"
 # atc and git-kb are installed through Cargo while under active development.
 # renovate: datasource=github-tags depName=gitkb/atc versioning=semver-coerced
 # "github:gitkb/atc" = "0.1.8"
-"github:hops-ops/hops-cli" = { version = "0.42.0", rename_exe = "hops" }
+"github:hops-ops/hops-cli" = { version = "0.43.1", rename_exe = "hops" }
 "github:hops-ops/distributed" = { version = "4.2.0", minimum_release_age = "0s" }
 "github:knative/client" = "knative-v1.23.0"
 "github:nkzw-tech/codiff" = "1.10.1"
