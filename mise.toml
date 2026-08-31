@@ -60,7 +60,7 @@ pipx = "1.16.7"
 "github:hops-ops/hops-cli" = { version = "0.43.1", rename_exe = "hops" }
 "github:hops-ops/distributed" = { version = "4.6.0", minimum_release_age = "0s" }
 "github:knative/client" = "knative-v1.23.0"
-"github:nkzw-tech/codiff" = "1.10.1"
+"github:nkzw-tech/codiff" = "1.11.1"
 "github:unbounded-tech/vnext" = "1.16.5"
 "github:harmony-labs/meta" = "0.2.22"
 terraform = "1.15.9"
