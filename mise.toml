@@ -36,7 +36,7 @@ opencode = "1.18.25"
 op = "2.38.1"
 stripe-cli = "1.50.6"
 flyctl = "0.4.95"
-pipx = "1.16.7"
+pipx = "1.17.1"
 "pipx:gimme-aws-creds" = "2.8.2"
 "pipx:git-filter-repo" = "2.47.0"
 
