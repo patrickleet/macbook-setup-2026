@@ -254,9 +254,10 @@ clone_if_missing "zsh-users/zsh-syntax-highlighting"
 # =============================================================================
 # 13. Shell config
 # =============================================================================
-step "Shell config (.zshrc)"
+step "Shell config (.zshrc + .zprofile)"
 ln -sf "$SETUP_DIR/.zshrc" "$HOME/.zshrc"
-done_msg "Linked .zshrc → ~/.zshrc"
+"$SETUP_DIR/scripts/configure-zprofile.sh"
+done_msg "Linked .zshrc and configured mise shims in .zprofile"
 
 # =============================================================================
 # 14. Optional auto-updates

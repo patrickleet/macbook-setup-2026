@@ -11,7 +11,7 @@ This repo installs the base developer setup I actually use:
 - `krew` plus the `ctx`, `ns`, and `oidc-login` `kubectl` plugins
 - Claude Code
 - Webwright runtime plus Codex and Claude Code plugins
-- Zsh plugins + repo-managed `.zshrc`
+- Zsh plugins, a repo-managed `.zshrc`, and non-interactive mise shims
 
 ## Quick start
 
@@ -33,7 +33,7 @@ The script will:
 8. Install Claude Code
 9. Install Webwright and register its Codex / Claude Code plugins
 10. Install GUI apps from [`Brewfile`](/Users/patrickleet/dev/macbook-setup/Brewfile)
-11. Install Zsh plugins and symlink [`.zshrc`](/Users/patrickleet/dev/macbook-setup/.zshrc) to `~/.zshrc`
+11. Install Zsh plugins, symlink [`.zshrc`](/Users/patrickleet/dev/macbook-setup/.zshrc) to `~/.zshrc`, and configure mise shims in `~/.zprofile`
 
 ## What gets installed
 
@@ -108,6 +108,17 @@ The repo-managed [`.zshrc`](/Users/patrickleet/dev/macbook-setup/.zshrc) sets up
 - `DOCKER_HOST` pointing at Dory (`unix://$HOME/.dory/dory.sock`)
 - A few personal aliases and helper functions
 
+Interactive Zsh sessions use the full `mise activate zsh` integration from
+`.zshrc`. Login and non-interactive sessions do not read `.zshrc`, so
+[`scripts/configure-zprofile.sh`](/Users/patrickleet/dev/macbook-setup/scripts/configure-zprofile.sh)
+maintains a marker-delimited `mise activate zsh --shims` block in
+`~/.zprofile`. This makes mise-managed tools available to Git hooks, IDEs, and
+automation while preserving Dory's managed block and other profile content.
+
+pnpm is installed directly by mise rather than Corepack. Its exact version is
+pinned in [`mise.toml`](/Users/patrickleet/dev/macbook-setup/mise.toml), where
+Renovate proposes version changes for review.
+
 ## Updating the setup
 
 Edit the source files in this repo, then re-run the relevant install step:
@@ -119,6 +130,7 @@ mise install
 ./scripts/update-tools.sh
 brew bundle --file=~/dev/macbook-setup/Brewfile
 ln -sf ~/dev/macbook-setup/.zshrc ~/.zshrc
+~/dev/macbook-setup/scripts/configure-zprofile.sh
 ```
 
 `init.sh` can also be re-run safely on an existing machine. It checks for existing installs and updates the cloned repo when possible.
@@ -152,6 +164,8 @@ To remove that LaunchAgent later:
 - [`init.sh`](/Users/patrickleet/dev/macbook-setup/init.sh): bootstrap script
 - [`scripts/install-webwright.sh`](/Users/patrickleet/dev/macbook-setup/scripts/install-webwright.sh): installs or refreshes Webwright runtime and agent plugins
 - [`scripts/repair-go-tools.sh`](/Users/patrickleet/dev/macbook-setup/scripts/repair-go-tools.sh): rebuilds missing Go internal tool binaries after mise installs Go
+- [`scripts/configure-zprofile.sh`](/Users/patrickleet/dev/macbook-setup/scripts/configure-zprofile.sh): idempotently enables mise shims for login and non-interactive Zsh while preserving other profile content
+- [`scripts/test-configure-zprofile.sh`](/Users/patrickleet/dev/macbook-setup/scripts/test-configure-zprofile.sh): validates profile preservation, idempotence, and login-shell pnpm resolution in an isolated fixture
 - [`scripts/update-tools.sh`](/Users/patrickleet/dev/macbook-setup/scripts/update-tools.sh): synchronizes clean `main` and applies pinned mise versions
 - [`mise.toml`](/Users/patrickleet/dev/macbook-setup/mise.toml): runtimes and CLI tools
 - [`.github/renovate.json`](/Users/patrickleet/dev/macbook-setup/.github/renovate.json): Renovate configuration for mise dependencies
