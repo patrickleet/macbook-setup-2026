@@ -47,7 +47,7 @@ pipx = "1.17.2"
 # npm global tools
 # =============================================================================
 "npm:typescript" = "7.0.2"
-"npm:@openai/codex" = "0.152.1"
+"npm:@openai/codex" = "0.153.3"
 "npm:@xai-official/grok" = { version = "1.0.13", npm_args = "--ignore-scripts=false --allow-scripts=@xai-official/grok" }
 
 # =============================================================================
