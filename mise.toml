@@ -58,7 +58,7 @@ pipx = "1.17.2"
 # renovate: datasource=github-tags depName=gitkb/atc versioning=semver-coerced
 # "github:gitkb/atc" = "0.1.8"
 "github:hops-ops/hops-cli" = { version = "0.50.0", rename_exe = "hops" }
-"github:hops-ops/distributed" = { version = "4.11.0", minimum_release_age = "0s" }
+"github:hops-ops/distributed" = { version = "4.12.1", minimum_release_age = "0s" }
 "github:knative/client" = "knative-v1.23.0"
 "github:nkzw-tech/codiff" = "1.11.1"
 "github:unbounded-tech/vnext" = "1.16.5"
