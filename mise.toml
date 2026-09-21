@@ -22,7 +22,7 @@ go = "1.27.1"
 # =============================================================================
 jq = "1.8.2"
 kubectl = "1.37.0"
-helm = "4.2.4"
+helm = "4.3.0"
 "aqua:txn2/kubefwd" = "1.25.16"
 lima = "2.2.0"
 colima = "0.10.3"
@@ -34,9 +34,9 @@ aws-cli = "2.36.49"
 gh = "2.101.0"
 opencode = "1.18.31"
 op = "2.38.1"
-stripe-cli = "1.50.10"
+stripe-cli = "1.51.0"
 flyctl = "0.4.104"
-pipx = "1.17.2"
+pipx = "1.17.5"
 "pipx:gimme-aws-creds" = "2.8.2"
 "pipx:git-filter-repo" = "2.47.0"
 
@@ -58,12 +58,12 @@ pipx = "1.17.2"
 # renovate: datasource=github-tags depName=gitkb/atc versioning=semver-coerced
 # "github:gitkb/atc" = "0.1.8"
 "github:hops-ops/hops-cli" = { version = "0.51.1", rename_exe = "hops" }
-"github:hops-ops/distributed" = { version = "4.12.1", minimum_release_age = "0s" }
+"github:hops-ops/distributed" = { version = "4.12.3", minimum_release_age = "0s" }
 "github:knative/client" = "knative-v1.23.0"
 "github:nkzw-tech/codiff" = "1.14.0"
 "github:unbounded-tech/vnext" = "1.16.6"
 "github:harmony-labs/meta" = "0.2.22"
-terraform = "1.16.1"
+terraform = "1.16.3"
 actionlint = "1.7.12"
 
 [tools."http:up"]
