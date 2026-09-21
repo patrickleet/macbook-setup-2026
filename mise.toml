@@ -31,7 +31,7 @@ docker-compose = "5.5.1"
 yq = "4.53.6"
 sops = "3.13.3"
 aws-cli = "2.36.38"
-gh = "2.100.0"
+gh = "2.101.0"
 opencode = "1.18.28"
 op = "2.38.1"
 stripe-cli = "1.50.10"
@@ -47,8 +47,8 @@ pipx = "1.17.5"
 # npm global tools
 # =============================================================================
 "npm:typescript" = "7.0.2"
-"npm:@openai/codex" = "0.154.0"
-"npm:@xai-official/grok" = { version = "1.0.13", npm_args = "--ignore-scripts=false --allow-scripts=@xai-official/grok" }
+"npm:@openai/codex" = "0.155.1"
+"npm:@xai-official/grok" = { version = "1.0.40", npm_args = "--ignore-scripts=false --allow-scripts=@xai-official/grok" }
 
 # =============================================================================
 # Tools installed from GitHub releases
@@ -57,10 +57,10 @@ pipx = "1.17.5"
 # atc and git-kb are installed through Cargo while under active development.
 # renovate: datasource=github-tags depName=gitkb/atc versioning=semver-coerced
 # "github:gitkb/atc" = "0.1.8"
-"github:hops-ops/hops-cli" = { version = "0.51.0", rename_exe = "hops" }
+"github:hops-ops/hops-cli" = { version = "0.51.1", rename_exe = "hops" }
 "github:hops-ops/distributed" = { version = "4.12.1", minimum_release_age = "0s" }
 "github:knative/client" = "knative-v1.23.0"
-"github:nkzw-tech/codiff" = "1.11.1"
+"github:nkzw-tech/codiff" = "1.14.0"
 "github:unbounded-tech/vnext" = "1.16.6"
 "github:harmony-labs/meta" = "0.2.22"
 terraform = "1.16.1"
