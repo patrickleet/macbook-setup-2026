@@ -35,7 +35,7 @@ gh = "2.101.0"
 opencode = "1.18.32"
 op = "2.38.1"
 stripe-cli = "1.51.1"
-flyctl = "0.4.105"
+flyctl = "0.4.106"
 pipx = "1.17.5"
 "pipx:gimme-aws-creds" = "2.8.2"
 "pipx:git-filter-repo" = "2.47.0"
@@ -47,7 +47,7 @@ pipx = "1.17.5"
 # npm global tools
 # =============================================================================
 "npm:typescript" = "7.0.2"
-"npm:@openai/codex" = "0.155.1"
+"npm:@openai/codex" = "0.156.1"
 "npm:@xai-official/grok" = { version = "1.0.40", npm_args = "--ignore-scripts=false --allow-scripts=@xai-official/grok" }
 
 # =============================================================================
