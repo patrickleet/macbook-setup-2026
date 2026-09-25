@@ -1,14 +1,7 @@
 # ── PATH ────────────────────────────────────────────────────────────
 typeset -U path  # deduplicate PATH entries
 export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.krew/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-
-# ── mise (dev tool manager) ────────────────────────────────────────
-# Keep before p10k instant prompt: auto-install/status output during hook-env
-# would otherwise trip Powerlevel10k's startup-output warning.
-if [[ -x "$HOME/.local/bin/mise" ]]; then
-  eval "$("$HOME/.local/bin/mise" activate zsh)"
-fi
+export PATH="$HOME/.dory/bin:$HOME/.local/share/atc/shims/bin:/usr/local/sbin:$PATH"
 
 # ── direnv ─────────────────────────────────────────────────────────
 # Load the initial directory environment before p10k's instant prompt starts
@@ -23,6 +16,16 @@ _prefer_cargo_bin_path() {
   path=("$HOME/.cargo/bin" ${path:#$HOME/.cargo/bin})
 }
 _prefer_cargo_bin_path
+
+# ── mise (dev tool manager) ────────────────────────────────────────
+# Activate after initial PATH/direnv changes, but before instant prompt.
+# Changing PATH after activation makes mise rerun hook-env at the first
+# precmd, where status output would trigger the p10k startup warning.
+if [[ -x "$HOME/.local/bin/mise" ]]; then
+  eval "$("$HOME/.local/bin/mise" activate zsh)"
+fi
+
+# Keep Cargo first after mise refreshes the environment on later prompts.
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _prefer_cargo_bin_path
 add-zsh-hook chpwd _prefer_cargo_bin_path
@@ -140,3 +143,10 @@ source ~/.antigen/bundles/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlight
 
 # I can't stop typing code to open projects
 alias code=zed
+# >>> dory cli >>>
+DORY_CLI_BIN="/Users/patrickleet/.dory/bin"
+case ":$PATH:" in
+  *":$DORY_CLI_BIN:"*) ;;
+  *) export PATH="$DORY_CLI_BIN:$PATH" ;;
+esac
+# <<< dory cli <<<
