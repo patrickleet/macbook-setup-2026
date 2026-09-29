@@ -47,7 +47,7 @@ pipx = "1.17.7"
 # npm global tools
 # =============================================================================
 "npm:typescript" = "7.0.2"
-"npm:@openai/codex" = "0.157.1"
+"npm:@openai/codex" = "0.159.0"
 "npm:@xai-official/grok" = { version = "1.0.41", npm_args = "--ignore-scripts=false --allow-scripts=@xai-official/grok" }
 
 # =============================================================================
@@ -57,7 +57,7 @@ pipx = "1.17.7"
 # atc and git-kb are installed through Cargo while under active development.
 # renovate: datasource=github-tags depName=gitkb/atc versioning=semver-coerced
 # "github:gitkb/atc" = "0.1.8"
-"github:hops-ops/hops-cli" = { version = "0.53.0", rename_exe = "hops" }
+"github:hops-ops/hops-cli" = { version = "0.53.1", rename_exe = "hops" }
 "github:hops-ops/distributed" = { version = "4.12.3", minimum_release_age = "0s" }
 "github:knative/client" = "knative-v1.23.0"
 "github:nkzw-tech/codiff" = "1.14.0"
