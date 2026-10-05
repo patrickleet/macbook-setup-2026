@@ -102,6 +102,7 @@ The repo-managed [`.zshrc`](/Users/patrickleet/dev/macbook-setup/.zshrc) sets up
 - `zsh-autosuggestions`
 - `zsh-syntax-highlighting`
 - `mise` shell activation
+- ATC shims (`~/.local/share/atc/shims/bin`) kept ahead of mise tool bins on each prompt, so `codex` and `grok` resolve to the shims
 - `direnv` shell hook
 - AWS CLI tab completion for `aws`
 - `~/.krew/bin` on `PATH`

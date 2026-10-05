@@ -11,11 +11,16 @@ if command -v direnv &>/dev/null; then
   _direnv_hook
 fi
 
-# Keep Cargo-installed binaries ahead of mise-managed release tools.
-_prefer_cargo_bin_path() {
+# ATC shims, then Cargo, ahead of mise's tool bins. mise activate prepends
+# those bins (npm-openai-codex, node, …), which otherwise shadows codex/grok.
+# Re-applied from precmd/chpwd registered below, after mise's own hooks.
+# Do not export PATH after mise activate and before the instant prompt:
+# the first precmd would rerun hook-env and trip the p10k startup warning.
+_prefer_shim_and_cargo_path() {
   path=("$HOME/.cargo/bin" ${path:#$HOME/.cargo/bin})
+  path=("$HOME/.local/share/atc/shims/bin" ${path:#$HOME/.local/share/atc/shims/bin})
 }
-_prefer_cargo_bin_path
+_prefer_shim_and_cargo_path
 
 # ── mise (dev tool manager) ────────────────────────────────────────
 # Activate after initial PATH/direnv changes, but before instant prompt.
@@ -25,10 +30,10 @@ if [[ -x "$HOME/.local/bin/mise" ]]; then
   eval "$("$HOME/.local/bin/mise" activate zsh)"
 fi
 
-# Keep Cargo first after mise refreshes the environment on later prompts.
+# mise's precmd/chpwd hooks are already registered and run first.
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd _prefer_cargo_bin_path
-add-zsh-hook chpwd _prefer_cargo_bin_path
+add-zsh-hook precmd _prefer_shim_and_cargo_path
+add-zsh-hook chpwd _prefer_shim_and_cargo_path
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
