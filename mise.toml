@@ -13,7 +13,7 @@ auto_install = true
 pnpm = "12.15.0"
 # Keep Node on the LTS line while letting Renovate update the exact release.
 node = "24.22.1"
-python = "3.14.8"
+python = "3.15.1"
 rust = "1.99.1"
 go = "1.27.3"
 
