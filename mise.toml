@@ -61,7 +61,7 @@ pipx = "1.18.12"
 "github:knative/client" = "knative-v1.23.0"
 "github:nkzw-tech/codiff" = "1.18.3"
 "github:unbounded-tech/vnext" = "1.16.6"
-"github:harmony-labs/meta" = "0.2.22"
+"github:harmony-labs/meta" = "path:~/.cargo"
 terraform = "1.17.1"
 actionlint = "1.7.12"
 

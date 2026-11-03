@@ -155,3 +155,9 @@ case ":$PATH:" in
   *) export PATH="$DORY_CLI_BIN:$PATH" ;;
 esac
 # <<< dory cli <<<
+# >>> atc tool shims >>>
+# ATC-launched harness sessions set ATC_TOOL_SHIMS_DIR; keep it first on PATH.
+if [[ -n ${ATC_TOOL_SHIMS_DIR-} && -d $ATC_TOOL_SHIMS_DIR ]]; then
+  path=("$ATC_TOOL_SHIMS_DIR" "${(@)path:#${(b)ATC_TOOL_SHIMS_DIR}}")
+fi
+# <<< atc tool shims <<<
