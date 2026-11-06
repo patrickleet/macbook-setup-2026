@@ -10,7 +10,7 @@ auto_install = true
 # Dev tool runtimes
 # =============================================================================
 [tools]
-pnpm = "12.16.1"
+pnpm = "12.18.0"
 # Keep Node on the LTS line while letting Renovate update the exact release.
 node = "24.22.2"
 python = "3.14.8"
