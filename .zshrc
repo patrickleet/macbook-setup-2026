@@ -1,7 +1,14 @@
 # ── PATH ────────────────────────────────────────────────────────────
 typeset -U path  # deduplicate PATH entries
 export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.krew/bin:$PATH"
-export PATH="$HOME/.dory/bin:$HOME/.local/share/atc/shims/bin:/usr/local/sbin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+# >>> dory cli >>>
+DORY_CLI_BIN="$HOME/.dory/bin"
+export PATH="$DORY_CLI_BIN:$PATH"
+# <<< dory cli <<<
+# >>> atc shims >>>
+export PATH="$HOME/.local/share/atc/shims/bin:$PATH"
+# <<< atc shims <<<
 
 # ── direnv ─────────────────────────────────────────────────────────
 # Load the initial directory environment before p10k's instant prompt starts
@@ -11,21 +18,21 @@ if command -v direnv &>/dev/null; then
   _direnv_hook
 fi
 
-# ATC shims, then Cargo, ahead of mise's tool bins. mise activate prepends
-# those bins (npm-openai-codex, node, …), which otherwise shadows codex/grok.
-# Re-applied from precmd/chpwd registered below, after mise's own hooks.
-# Do not export PATH after mise activate and before the instant prompt:
-# the first precmd would rerun hook-env and trip the p10k startup warning.
+# Restore shim priority after mise's precmd and chpwd hooks update PATH.
 _prefer_shim_and_cargo_path() {
-  path=("$HOME/.cargo/bin" ${path:#$HOME/.cargo/bin})
-  path=("$HOME/.local/share/atc/shims/bin" ${path:#$HOME/.local/share/atc/shims/bin})
+  path=("$HOME/.local/share/atc/shims/bin" "$HOME/.cargo/bin" "${path[@]}")
+# >>> atc tool shims >>>
+# ATC-launched harness sessions set ATC_TOOL_SHIMS_DIR; keep it first on PATH.
+if [[ -n ${ATC_TOOL_SHIMS_DIR-} && -d $ATC_TOOL_SHIMS_DIR ]]; then
+  path=("$ATC_TOOL_SHIMS_DIR" "${(@)path:#${(b)ATC_TOOL_SHIMS_DIR}}")
+fi
+# <<< atc tool shims <<<
 }
 _prefer_shim_and_cargo_path
 
 # ── mise (dev tool manager) ────────────────────────────────────────
-# Activate after initial PATH/direnv changes, but before instant prompt.
-# Changing PATH after activation makes mise rerun hook-env at the first
-# precmd, where status output would trigger the p10k startup warning.
+# Activate after all startup PATH edits and before instant prompt. A later
+# PATH edit makes mise rerun at the first precmd and can trigger a warning.
 if [[ -x "$HOME/.local/bin/mise" ]]; then
   eval "$("$HOME/.local/bin/mise" activate zsh)"
 fi
@@ -148,16 +155,3 @@ source ~/.antigen/bundles/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlight
 
 # I can't stop typing code to open projects
 alias code=zed
-# >>> dory cli >>>
-DORY_CLI_BIN="/Users/patrickleet/.dory/bin"
-case ":$PATH:" in
-  *":$DORY_CLI_BIN:"*) ;;
-  *) export PATH="$DORY_CLI_BIN:$PATH" ;;
-esac
-# <<< dory cli <<<
-# >>> atc tool shims >>>
-# ATC-launched harness sessions set ATC_TOOL_SHIMS_DIR; keep it first on PATH.
-if [[ -n ${ATC_TOOL_SHIMS_DIR-} && -d $ATC_TOOL_SHIMS_DIR ]]; then
-  path=("$ATC_TOOL_SHIMS_DIR" "${(@)path:#${(b)ATC_TOOL_SHIMS_DIR}}")
-fi
-# <<< atc tool shims <<<
