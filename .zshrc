@@ -21,20 +21,17 @@ fi
 # Restore shim priority after mise's precmd and chpwd hooks update PATH.
 _prefer_shim_and_cargo_path() {
   path=("$HOME/.local/share/atc/shims/bin" "$HOME/.cargo/bin" "${path[@]}")
-# >>> atc tool shims >>>
-# ATC-launched harness sessions set ATC_TOOL_SHIMS_DIR; keep it first on PATH.
-if [[ -n ${ATC_TOOL_SHIMS_DIR-} && -d $ATC_TOOL_SHIMS_DIR ]]; then
-  path=("$ATC_TOOL_SHIMS_DIR" "${(@)path:#${(b)ATC_TOOL_SHIMS_DIR}}")
-fi
-# <<< atc tool shims <<<
+  if [[ -n ${ATC_TOOL_SHIMS_DIR-} && -d $ATC_TOOL_SHIMS_DIR ]]; then
+    path=("$ATC_TOOL_SHIMS_DIR" "${path[@]}")
+  fi
 }
 _prefer_shim_and_cargo_path
 
 # ── mise (dev tool manager) ────────────────────────────────────────
-# Activate after all startup PATH edits and before instant prompt. A later
-# PATH edit makes mise rerun at the first precmd and can trigger a warning.
+# Activate before instant prompt. Keep status notices out of prompt hooks,
+# since ATC's managed block at the end of this file can reorder PATH.
 if [[ -x "$HOME/.local/bin/mise" ]]; then
-  eval "$("$HOME/.local/bin/mise" activate zsh)"
+  eval "$("$HOME/.local/bin/mise" activate zsh --quiet)"
 fi
 
 # mise's precmd/chpwd hooks are already registered and run first.
@@ -155,3 +152,9 @@ source ~/.antigen/bundles/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlight
 
 # I can't stop typing code to open projects
 alias code=zed
+# >>> atc tool shims >>>
+# ATC-launched harness sessions set ATC_TOOL_SHIMS_DIR; keep it first on PATH.
+if [[ -n ${ATC_TOOL_SHIMS_DIR-} && -d $ATC_TOOL_SHIMS_DIR ]]; then
+  path=("$ATC_TOOL_SHIMS_DIR" "${(@)path:#${(b)ATC_TOOL_SHIMS_DIR}}")
+fi
+# <<< atc tool shims <<<
