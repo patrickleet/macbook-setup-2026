@@ -2,13 +2,6 @@
 typeset -U path  # deduplicate PATH entries
 export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.krew/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-# >>> dory cli >>>
-DORY_CLI_BIN="$HOME/.dory/bin"
-export PATH="$DORY_CLI_BIN:$PATH"
-# <<< dory cli <<<
-# >>> atc shims >>>
-export PATH="$HOME/.local/share/atc/shims/bin:$PATH"
-# <<< atc shims <<<
 
 # ── direnv ─────────────────────────────────────────────────────────
 # Load the initial directory environment before p10k's instant prompt starts
