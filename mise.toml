@@ -47,7 +47,7 @@ pipx = "1.18.19"
 # =============================================================================
 "npm:typescript" = "7.0.2"
 "npm:@openai/codex" = "0.171.0"
-"npm:@xai-official/grok" = { version = "1.0.89", npm_args = "--ignore-scripts=false --allow-scripts=@xai-official/grok" }
+"npm:@xai-official/grok" = { version = "1.0.92", npm_args = "--ignore-scripts=false --allow-scripts=@xai-official/grok" }
 
 # =============================================================================
 # Tools installed from GitHub releases
